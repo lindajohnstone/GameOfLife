@@ -5,15 +5,19 @@ namespace tests.GameOfLife
 {
     public class CellTests
     {
-        [Fact]
-        public void Should_Test_Cell_State()
+        [Theory]
+        [InlineData("Alive", true)]
+        [InlineData("Dead", false)]
+        public void Should_Test_Cell_State(string state, bool expected) 
         {
             // arrange
             var cell = new Cell();
             // act
             cell.State = StateEnum.Alive;
+            var cellToString = cell.State.ToString();
+            var result = state.Equals(cellToString);
             // assert
-            Assert.Equal(StateEnum.Alive, cell.State);
+            Assert.Equal(expected, result);
         }
     }
 }
