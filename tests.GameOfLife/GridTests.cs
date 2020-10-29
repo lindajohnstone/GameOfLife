@@ -6,19 +6,6 @@ namespace tests.GameOfLife
 {
     public class GridTests
     {
-        [Theory]
-        [InlineData(10, 12, true)]
-        [InlineData(9, 4, false)]
-        public void Should_Test_Grid_GetLength_At_Least_Ten(int gridLength, int input, bool expected)
-        {
-            // arrange
-            var grid = new GridSetUp();
-            // act
-            grid.SetUpGrid(gridLength, gridLength);
-            var result = grid.IsValid(input);
-            // assert
-            Assert.Equal(expected, result);
-        }
         [Fact]
         public void Should_Test_SetUpGrid()
         {
@@ -31,6 +18,25 @@ namespace tests.GameOfLife
             grid.SetUpGrid(gridLength, gridWidth);
             // assert
             Assert.Equal(expected.Length, grid.Grid.Length);
+        }
+        [Fact]
+        public void Should_Test_InitialiseGrid()
+        {
+            // arrange
+            var grid = new GridSetUp();
+            var gridLength = 3;
+            var gridWidth = 3;
+            grid.SetUpGrid(gridLength, gridWidth);
+            var total = gridLength * gridWidth;
+            var expected = new [,]{
+                {1,1,1},
+                {1,1,1},
+                {1,1,1},
+            };
+            // act
+            grid.Initialise();
+            // assert
+            Assert.Equal(expected, grid.Grid);
         }
     }
 }

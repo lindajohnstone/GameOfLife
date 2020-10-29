@@ -4,16 +4,22 @@ namespace GameOfLife
 {
     public class GridSetUp
     {
-        public int[,] Grid { get; private set; } // TODO: rename property
-        public bool IsValid(int gridLength)
-        {
-            if (Grid != null && gridLength < Grid.GetLength(0)) return false; // TODO: input as (x,y)
-            return true;
-        }
-
+        public int[,] Grid { get; private set; } 
+    
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (int[,])Array.CreateInstance(typeof(int), gridLength, gridWidth);
+        }
+
+        public void Initialise()
+        {
+            for (int i = 0; i < Grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < Grid.GetLength(1); j++)
+                {
+                    Grid[i,j] = 1;
+                }
+            }
         }
     }
 }
