@@ -17,7 +17,7 @@ namespace GameOfLife
             {
                 for (int j = 0; j < Grid.GetLength(1); j++)
                 {
-                    Grid[i,j] = 1;
+                    Grid[i,j] = 0;
                 }
             }
         }

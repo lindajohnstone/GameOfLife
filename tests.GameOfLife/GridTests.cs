@@ -29,9 +29,9 @@ namespace tests.GameOfLife
             grid.SetUpGrid(gridLength, gridWidth);
             var total = gridLength * gridWidth;
             var expected = new [,]{
-                {1,1,1},
-                {1,1,1},
-                {1,1,1},
+                {0,0,0},
+                {0,0,0},
+                {0,0,0},
             };
             // act
             grid.Initialise();
