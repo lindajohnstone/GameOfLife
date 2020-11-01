@@ -11,7 +11,7 @@ namespace GameOfLife
         }
         public StateEnum State { get; set; }
 
-        public int NeighbourStateCount(int cellX, int cellY)
+        public int NeighbourStateAliveCount(int cellX, int cellY)
         {
             var neighbours = new [] { 
                 _grid.Grid[cellX, cellY - 1], 
@@ -31,8 +31,13 @@ namespace GameOfLife
                     count++;
                 }
             } 
-            
             return count;
+        }
+
+        public int SwitchState(int cellX, int cellY)
+        {
+            if (_grid.Grid[cellX, cellY] == 0) return 1;
+            return 0;
         }
     }
 }

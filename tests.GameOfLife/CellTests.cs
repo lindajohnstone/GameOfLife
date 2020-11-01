@@ -18,7 +18,7 @@ namespace tests.GameOfLife
             Assert.Equal(cell.State, state);
         }
         [Fact]
-        public void Should_Count_Cell_NeighbourState()
+        public void Should_Count_Cell_NeighbourStateAlive()
         {
             // arrange
             var cell = new Cell(3, 3);
@@ -26,7 +26,20 @@ namespace tests.GameOfLife
             var cellY = 1;
             var expected = 8;
             // act
-            var result = cell.NeighbourStateCount(cellX, cellY);
+            var result = cell.NeighbourStateAliveCount(cellX, cellY);
+            // assert
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void Should_Test_SwitchState()
+        {
+            // arrange
+            var cell = new Cell(3, 3);
+            var cellX = 1;
+            var cellY = 1;
+            var expected = 1;
+            // act
+            var result = cell.SwitchState(cellX, cellY);
             // assert
             Assert.Equal(expected, result);
         }
