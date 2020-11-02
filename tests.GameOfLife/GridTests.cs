@@ -10,7 +10,8 @@ namespace tests.GameOfLife
         public void Should_Test_SetUpGrid()
         {
             // arrange
-            var grid = new GridSetUp();
+            var output = new StubOutput();
+            var grid = new GridSetUp(output);
             var gridLength = 10;
             var gridWidth = 10;
             var expected = new int[10,10];
@@ -23,7 +24,8 @@ namespace tests.GameOfLife
         public void Should_Test_InitialiseGrid()
         {
             // arrange
-            var grid = new GridSetUp();
+            var output = new StubOutput();
+            var grid = new GridSetUp(output);
             var gridLength = 3;
             var gridWidth = 3;
             grid.SetUpGrid(gridLength, gridWidth);
@@ -37,6 +39,20 @@ namespace tests.GameOfLife
             grid.Initialise();
             // assert
             Assert.Equal(expected, grid.Grid);
+        }
+        [Fact]
+        public void Should_Test_PrintGrid()
+        {
+            // arrange
+            var output = new StubOutput();
+            var grid = new GridSetUp(output);
+            var expected = "* ";
+            // act
+            grid.SetUpGrid(1,1);
+            grid.Initialise();
+            grid.PrintGrid();
+            // assert
+            Assert.Equal(expected, output.GetWriteLine());
         }
     }
 }
