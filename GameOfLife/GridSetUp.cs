@@ -16,30 +16,30 @@ namespace GameOfLife
         }
         public void Initialise()
         {
-            for (int i = 0; i < Grid.GetLength(0); i++)
+            for (int row = 0; row < Grid.GetUpperBound(0); row++)
             {
-                for (int j = 0; j < Grid.GetLength(1); j++)
+                for (int col = 0; col < Grid.GetUpperBound(1); col++)
                 {
-                    Grid[i,j] = 0;
+
+                    Grid[row,col] = 0;
                 }
             }
         }
         public void RunGame()
         {
             SetUpGrid(3, 3);
-            //grid.Initialise();
             PrintGrid();
         }
         public void PrintGrid()
         {
-            for (int i = 0; i < Grid.GetLength(0); i++)
+            for (int row = 0; row < Grid.GetLength(0); row++)
             {
-                for (int j = 0; j < Grid.GetLength(1); j++)
+                for (int col = 0; col < Grid.GetLength(1); col++)
                 {
-                    var cell = Grid[i,j];
+                    var cell = Grid[row,col];
                     if (cell == 0)
                     {
-                        _output.Write("* "); // TODO: add IOutput for testing. Same for line 37 & 40
+                        _output.Write("* ");
                     }
                     else if (cell == 1)
                     {
