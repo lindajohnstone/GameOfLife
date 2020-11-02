@@ -6,7 +6,10 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var grid = new GridSetUp();
+            grid.SetUpGrid(3, 3);
+            grid.Initialise();
+            grid.PrintGrid();
         }
     }
 }
