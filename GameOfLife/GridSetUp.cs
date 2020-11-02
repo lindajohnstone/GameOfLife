@@ -5,7 +5,11 @@ namespace GameOfLife
     public class GridSetUp
     {
         public int[,] Grid { get; private set; } 
-        
+        IOutput _output;
+        public GridSetUp(IOutput output)
+        {
+            _output = output;
+        }
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (int[,])Array.CreateInstance(typeof(int), gridLength, gridWidth);
@@ -20,7 +24,12 @@ namespace GameOfLife
                 }
             }
         }
-
+        public void RunGame()
+        {
+            SetUpGrid(3, 3);
+            //grid.Initialise();
+            PrintGrid();
+        }
         public void PrintGrid()
         {
             for (int i = 0; i < Grid.GetLength(0); i++)
@@ -30,14 +39,14 @@ namespace GameOfLife
                     var cell = Grid[i,j];
                     if (cell == 0)
                     {
-                        Console.Write("* "); // TODO: add IOutput for testing. Same for line 37
+                        _output.Write("* "); // TODO: add IOutput for testing. Same for line 37 & 40
                     }
                     else if (cell == 1)
                     {
-                        Console.Write(" ");
+                        _output.Write(" ");
                     }
                 }
-                Console.WriteLine(Environment.NewLine);
+                _output.WriteLine(Environment.NewLine);
             }
         }
     }

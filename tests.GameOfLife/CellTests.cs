@@ -11,7 +11,7 @@ namespace tests.GameOfLife
         public void Should_Test_Cell_State(StateEnum state) 
         {
             // arrange
-            var cell = new Cell(3,3);
+            var cell = new Cell(3, 3);
             // act
             cell.State = state;
             // assert

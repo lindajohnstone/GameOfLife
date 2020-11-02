@@ -4,9 +4,11 @@ namespace GameOfLife
 {
     public class Cell
     {
-        GridSetUp _grid = new GridSetUp();
+        GridSetUp _grid; 
+        IOutput _output; // TODO: warning: never assigned to and will always have its default value null
         public Cell(int gridLength, int gridWidth)
         {
+            _grid = new GridSetUp(_output);
             _grid.SetUpGrid(gridLength, gridWidth);
         }
         public StateEnum State { get; set; }
