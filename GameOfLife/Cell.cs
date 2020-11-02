@@ -4,6 +4,7 @@ namespace GameOfLife
 {
     public class Cell
     {
+        IOutput _output;
         GridSetUp _grid = new GridSetUp();
         public Cell(int gridLength, int gridWidth)
         {
