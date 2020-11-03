@@ -4,15 +4,15 @@ namespace GameOfLife
 {
     public class OvercrowdingRule : IRules
     {
-        Cell _cell;
-        public OvercrowdingRule(Cell cell)
+        GridSetUp _grid;
+        public OvercrowdingRule(GridSetUp grid)
         {
-            _cell = cell;
+            _grid = grid;
         }
 
         public bool Calculate(int cellX, int cellY)
         {
-            var count = _cell.HowManyLiveNeighbours(cellX, cellY);
+            var count = _grid.HowManyLiveNeighbours(cellX, cellY);
             if (count > 4) return true;
             return false;
         }

@@ -4,14 +4,14 @@ namespace GameOfLife
 {
     public class UnderpopulationRule : IRules
     {
-        private Cell _cell;
-        public UnderpopulationRule(Cell cell)
+        private GridSetUp _grid;
+        public UnderpopulationRule(GridSetUp grid)
         {
-            _cell = cell;
+            _grid = grid;
         }
         public bool Calculate(int cellX, int cellY)
         {
-            var count = _cell.HowManyLiveNeighbours(cellX, cellY);
+            var count = _grid.HowManyLiveNeighbours(cellX, cellY);
             if (count < 2) return true;
             return false;
         }

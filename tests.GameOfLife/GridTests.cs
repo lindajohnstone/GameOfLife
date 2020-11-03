@@ -52,5 +52,18 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, output.GetWriteLine());
         }
+        [Fact]
+        public void Should_Count_Cell_NeighbourStateAlive()
+        {
+            // arrange
+            var grid = new GridSetUp(new StubOutput());
+            var row = 1;
+            var col = 1;
+            var expected = 8;
+            // act
+            var result = grid.HowManyLiveNeighbours(row, col);
+            // assert 
+            Assert.Equal(expected, result);
+        }
     }
 }

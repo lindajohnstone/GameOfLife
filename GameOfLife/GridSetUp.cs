@@ -53,5 +53,27 @@ namespace GameOfLife
                 _output.WriteLine(Environment.NewLine);
             }
         }
+        public int HowManyLiveNeighbours(int row, int col)
+        {
+            var neighbours = new [] { 
+                Grid[row, col - 1], 
+                Grid[row, col + 1],
+                Grid[row - 1, col],
+                Grid[row + 1, col],
+                Grid[row - 1, col - 1],
+                Grid[row - 1, col + 1],
+                Grid[row + 1, col - 1],
+                Grid[row + 1, col + 1]
+            }; 
+            var count = 0;
+            foreach(int neighbour in neighbours)
+            {
+                if(neighbour == 0) 
+                {
+                    count++;
+                }
+            } 
+            return count;
+        }
     }
 }
