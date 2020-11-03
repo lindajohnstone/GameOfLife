@@ -13,6 +13,11 @@ namespace GameOfLife
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (int[,])Array.CreateInstance(typeof(int), gridLength, gridWidth);
+            /* Grid = new int[,] {
+                {0,1,0},
+                {1,0,1},
+                {0,1,0},
+            }; */
         }
         public void Initialise()
         {
@@ -20,7 +25,6 @@ namespace GameOfLife
             {
                 for (int col = 0; col < Grid.GetUpperBound(1); col++)
                 {
-
                     Grid[row,col] = 0;
                 }
             }
