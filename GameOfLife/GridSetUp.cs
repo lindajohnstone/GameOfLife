@@ -75,5 +75,10 @@ namespace GameOfLife
             } 
             return count;
         }
+        public void SwitchCellState(int row, int col)
+        {
+            var cell = Grid[row, col];
+            cell = cell == 0 ? 1 : 0;
+        }
     }
 }
