@@ -30,5 +30,17 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, result);
         }
+        [Fact]
+        public void Should_Test_SurvivalRule()
+        {
+            // arrange
+            var grid = new GridSurvival();
+            var rule = new Survival(grid);
+            var expected = true;
+            // act
+            var result = rule.Calculate(1, 1);
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }

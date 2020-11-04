@@ -1,15 +1,13 @@
-using System;
-
 namespace tests.GameOfLife
 {
-    public class GridUnderpop
+    public class GridSurvival
     {
         int[,] grid = new [,]{
-            {1,1,1},
-            {1,0,1},
-            {1,1,0},
+            {0,0,0},
+            {0,0,1},
+            {0,1,0},
         };
-        public GridUnderpop()
+        public GridSurvival()
         {
         }
 

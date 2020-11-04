@@ -25,13 +25,14 @@ namespace GameOfLife
             {
                 for (int col = 0; col < Grid.GetUpperBound(1); col++)
                 {
-                    Grid[row,col] = 0;
+                    Grid[row, col] = 0;
                 }
             }
         }
         public void RunGame()
         {
             SetUpGrid(3, 3);
+            SwitchCellState(1,1);
             PrintGrid();
         }
         public void PrintGrid()
