@@ -2,6 +2,6 @@ namespace GameOfLife
 {
     public interface IRules
     {
-        public bool Calculate(int row, int col);
+        public bool ManageRules(int row, int col);
     }
 }

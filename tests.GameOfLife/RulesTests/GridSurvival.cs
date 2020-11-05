@@ -3,7 +3,7 @@ namespace tests.GameOfLife
     public class GridSurvival
     {
         int[,] grid = new [,]{
-            {0,0,0},
+            {1,1,1},
             {0,0,1},
             {0,1,0},
         };

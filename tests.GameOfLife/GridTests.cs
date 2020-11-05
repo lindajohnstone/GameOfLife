@@ -66,20 +66,5 @@ namespace tests.GameOfLife
             // assert 
             Assert.Equal(expected, result);
         }
-        [Theory]
-        [InlineData(State.Dead, 0)] 
-        [InlineData(State.Alive, 1)] 
-        public void Should_Test_SwitchState(State state, int expected)
-        {
-            // arrange
-            var grid = new GridSetUp(new StubOutput());
-            grid.SetUpGrid(3, 3);
-            var row = 1;
-            var col = 1;
-            // act
-            grid.SwitchCellState(row, col);
-            // assert
-            // Assert.Equal(expected, result);
-        }
     }
 }

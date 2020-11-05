@@ -4,11 +4,15 @@ namespace GameOfLife
 {
     public class GridSetUp
     {
+        const int gridLength  = 3;
+        const int gridWidth = 3;
+        const int row = 1;
+        const int col = 1;
         public int[,] Grid { get; private set; } 
         IOutput _output;
         public GridSetUp(IOutput output)
         {
-            _output = output;
+            _output = output;;
         }
         public void SetUpGrid(int gridLength, int gridWidth)
         {
@@ -25,14 +29,14 @@ namespace GameOfLife
             {
                 for (int col = 0; col < Grid.GetUpperBound(1); col++)
                 {
-                    Grid[row, col] = 0;
+                    Grid[row, col] = (int)State.Alive;
                 }
             }
         }
         public void RunGame()
         {
-            SetUpGrid(3, 3);
-            SwitchCellState(1,1);
+            SetUpGrid(gridLength, gridWidth);
+            SwitchCellState(row, col);
             PrintGrid();
         }
         public void PrintGrid()
@@ -42,13 +46,13 @@ namespace GameOfLife
                 for (int col = 0; col < Grid.GetLength(1); col++)
                 {
                     var cell = Grid[row,col];
-                    if (cell == 0)
+                    if (cell == (int)State.Alive)
                     {
                         _output.Write("* ");
                     }
-                    else if (cell == 1)
+                    else if (cell == (int)State.Dead)
                     {
-                        _output.Write(" ");
+                        _output.Write("  ");
                     }
                 }
                 _output.WriteLine(Environment.NewLine);
@@ -69,7 +73,7 @@ namespace GameOfLife
             var count = 0;
             foreach(int neighbour in neighbours)
             {
-                if(neighbour == 0) 
+                if(neighbour == (int)State.Alive) 
                 {
                     count++;
                 }
@@ -79,7 +83,7 @@ namespace GameOfLife
         public void SwitchCellState(int row, int col)
         {
             var cell = Grid[row, col];
-            cell = cell == 0 ? 1 : 0;
+            Grid[row, col] = cell == (int)State.Alive ? (int)State.Dead : (int)State.Alive;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace tests.GameOfLife
             var rule = new Underpop(grid);
             var expected = true;
             // act
-            var result = rule.Calculate(1,1);
+            var result = rule.ManageRules(1,1);
             // assert
             Assert.Equal(expected, result);
         }
@@ -26,7 +26,7 @@ namespace tests.GameOfLife
             grid.SetUpGrid(3, 3);
             var expected = true;
             // act
-            var result = rule.Calculate(1, 1);
+            var result = rule.ManageRules(1, 1);
             // assert
             Assert.Equal(expected, result);
         }
@@ -38,7 +38,19 @@ namespace tests.GameOfLife
             var rule = new Survival(grid);
             var expected = true;
             // act
-            var result = rule.Calculate(1, 1);
+            var result = rule.ManageRules(1, 1);
+            // assert
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void Should_Test_ReproductionRule()
+        {
+            // arrange
+            var grid = new GridRepro();
+            var rule = new Reproduction(grid);
+            var expected = true;
+            // act
+            var result = rule.ManageRules(1,1);
             // assert
             Assert.Equal(expected, result);
         }

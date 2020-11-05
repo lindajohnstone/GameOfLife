@@ -10,7 +10,7 @@ namespace GameOfLife
             _grid = grid;
         }
 
-        public bool Calculate(int row, int col)
+        public bool ManageRules(int row, int col)
         {
             var count = _grid.HowManyLiveNeighbours(row, col);
             if (count > 4) return true;
