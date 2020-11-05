@@ -10,7 +10,7 @@ namespace tests.GameOfLife
         public void Should_Test_SetUpGrid()
         {
             // arrange
-            var grid = new GridSetUp(new StubOutput());
+            var grid = new Universe(new StubOutput());
             var gridLength = 10;
             var gridWidth = 10;
             var expected = new int[10,10];
@@ -23,7 +23,7 @@ namespace tests.GameOfLife
         public void Should_Test_InitialiseGrid()
         {
             // arrange
-            var grid = new GridSetUp(new StubOutput());
+            var grid = new Universe(new StubOutput());
             var gridLength = 3;
             var gridWidth = 3;
             grid.SetUpGrid(gridLength, gridWidth);
@@ -43,7 +43,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var output = new StubOutput();
-            var grid = new GridSetUp(output);
+            var grid = new Universe(output);
             var expected = "* ";
             // act
             grid.SetUpGrid(1,1);
@@ -56,7 +56,7 @@ namespace tests.GameOfLife
         public void Should_Count_Cell_NeighbourStateAlive()
         {
             // arrange
-            var grid = new GridSetUp(new StubOutput());
+            var grid = new Universe(new StubOutput());
             grid.SetUpGrid(3, 3);
             var row = 1;
             var col = 1;

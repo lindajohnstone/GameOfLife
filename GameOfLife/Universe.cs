@@ -2,7 +2,7 @@ using System;
 
 namespace GameOfLife
 {
-    public class GridSetUp
+    public class Universe
     {
         const int gridLength  = 3;
         const int gridWidth = 3;
@@ -10,7 +10,7 @@ namespace GameOfLife
         const int col = 1;
         public int[,] Grid { get; private set; } 
         IOutput _output;
-        public GridSetUp(IOutput output)
+        public Universe(IOutput output)
         {
             _output = output;;
         }

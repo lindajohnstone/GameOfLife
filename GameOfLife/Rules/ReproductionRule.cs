@@ -2,9 +2,9 @@ namespace GameOfLife
 {
     public class ReproductionRule : IRules
     {
-        private GridSetUp _grid;
+        private Universe _grid;
 
-        public ReproductionRule(GridSetUp grid)
+        public ReproductionRule(Universe grid)
         {
             _grid = grid;
         }

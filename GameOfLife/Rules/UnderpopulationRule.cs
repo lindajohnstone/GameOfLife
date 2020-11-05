@@ -4,8 +4,8 @@ namespace GameOfLife
 {
     public class UnderpopulationRule : IRules
     {
-        private GridSetUp _grid;
-        public UnderpopulationRule(GridSetUp grid)
+        private Universe _grid;
+        public UnderpopulationRule(Universe grid)
         {
             _grid = grid;
         }

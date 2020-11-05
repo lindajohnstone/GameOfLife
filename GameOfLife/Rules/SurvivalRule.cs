@@ -5,8 +5,8 @@ namespace GameOfLife
 {
     public class SurvivalRule : IRules
     {
-        private GridSetUp _grid;
-        public SurvivalRule(GridSetUp grid)
+        private Universe _grid;
+        public SurvivalRule(Universe grid)
         {
             _grid = grid;
         } 

@@ -4,8 +4,8 @@ namespace GameOfLife
 {
     public class OvercrowdingRule : IRules
     {
-        GridSetUp _grid;
-        public OvercrowdingRule(GridSetUp grid)
+        Universe _grid;
+        public OvercrowdingRule(Universe grid)
         {
             _grid = grid;
         }
