@@ -28,10 +28,12 @@ namespace tests.GameOfLife
             var gridWidth = 3;
             grid.SetUpGrid(gridLength, gridWidth);
             var total = gridLength * gridWidth;
+            var cell = new Cell();
+            cell.CellState = State.Alive;
             var expected = new [,]{
-                {0,0,0},
-                {0,0,0},
-                {0,0,0},
+                {cell,cell,cell},
+                {cell,cell,cell},
+                {cell,cell,cell},
             };
             // act
             grid.Initialise();

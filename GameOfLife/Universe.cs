@@ -8,15 +8,15 @@ namespace GameOfLife
         const int gridWidth = 3;
         const int row = 1;
         const int col = 1;
-        public int[,] Grid { get; private set; } 
+        public Cell[,] Grid { get; private set; } 
         IOutput _output;
         public Universe(IOutput output)
         {
-            _output = output;;
+            _output = output;
         }
         public void SetUpGrid(int gridLength, int gridWidth)
         {
-            Grid = (int[,])Array.CreateInstance(typeof(int), gridLength, gridWidth);
+            Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
             /* Grid = new int[,] {
                 {0,1,0},
                 {1,0,1},
@@ -29,13 +29,16 @@ namespace GameOfLife
             {
                 for (int col = 0; col < Grid.GetUpperBound(1); col++)
                 {
-                    Grid[row, col] = (int)State.Alive;
+                    Cell cell = new Cell();
+                    cell.CellState = State.Alive;
+                    Grid[row, col] = cell;
                 }
             }
         }
         public void RunGame()
         {
             SetUpGrid(gridLength, gridWidth);
+            Initialise();
             SwitchCellState(row, col);
             PrintGrid();
         }
@@ -46,11 +49,11 @@ namespace GameOfLife
                 for (int col = 0; col < Grid.GetLength(1); col++)
                 {
                     var cell = Grid[row,col];
-                    if (cell == (int)State.Alive)
+                    if (cell.CellState == State.Alive)
                     {
                         _output.Write("* ");
                     }
-                    else if (cell == (int)State.Dead)
+                    else if (cell.CellState == State.Dead)
                     {
                         _output.Write("  ");
                     }
@@ -71,9 +74,9 @@ namespace GameOfLife
                 Grid[row + 1, col + 1]
             }; 
             var count = 0;
-            foreach(int neighbour in neighbours)
+            foreach(Cell neighbour in neighbours)
             {
-                if(neighbour == (int)State.Alive) 
+                if(neighbour.CellState == State.Alive) 
                 {
                     count++;
                 }
@@ -83,7 +86,8 @@ namespace GameOfLife
         public void SwitchCellState(int row, int col)
         {
             var cell = Grid[row, col];
-            Grid[row, col] = cell == (int)State.Alive ? (int)State.Dead : (int)State.Alive;
+            cell.CellState = cell.CellState == State.Alive ? State.Dead : State.Alive;
+            Grid[row, col] = cell;
         }
     }
 }

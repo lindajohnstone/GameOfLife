@@ -7,8 +7,11 @@ namespace tests.GameOfLife
             {0,0,1},
             {0,1,0},
         };
+        public int[,] Grid { get; private set; }
+
         public GridSurvival()
         {
+            Grid = grid;
         }
 
         public int HowManyLiveNeighbours(int row, int col)
