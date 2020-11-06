@@ -4,7 +4,7 @@ using GameOfLife;
 
 namespace tests.GameOfLife
 {
-    public class GridTests
+    public class UniverseTests
     {
         [Fact]
         public void Should_Test_SetUpGrid()
@@ -13,7 +13,7 @@ namespace tests.GameOfLife
             var grid = new Universe(new StubOutput());
             var gridLength = 10;
             var gridWidth = 10;
-            var expected = new int[10,10];
+            var expected = new Cell[10,10];
             // act
             grid.SetUpGrid(gridLength, gridWidth);
             // assert
@@ -24,16 +24,16 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe(new StubOutput());
-            var gridLength = 3;
-            var gridWidth = 3;
-            grid.SetUpGrid(gridLength, gridWidth);
-            var total = gridLength * gridWidth;
+            //var gridLength = 3;
+            //var gridWidth = 3;
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            //var total = Constants.GridLength * Constants.GridWidth;
             var cell = new Cell();
-            cell.CellState = State.Alive;
+            //cell.CellState = State.Alive;
             var expected = new [,]{
-                {cell,cell,cell},
-                {cell,cell,cell},
-                {cell,cell,cell},
+                {cell, cell, cell},
+                {cell, cell, cell},
+                {cell, cell, cell}
             };
             // act
             grid.Initialise();
@@ -67,6 +67,16 @@ namespace tests.GameOfLife
             var result = grid.HowManyLiveNeighbours(row, col);
             // assert 
             Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void Should_Test_HowManyNeighbours_Wrapping()
+        {
+            // arrange
+
+            // act
+
+            // assert
+
         }
     }
 }

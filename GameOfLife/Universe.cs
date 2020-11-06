@@ -4,10 +4,6 @@ namespace GameOfLife
 {
     public class Universe
     {
-        const int gridLength  = 3;
-        const int gridWidth = 3;
-        const int row = 1;
-        const int col = 1;
         public Cell[,] Grid { get; private set; } 
         IOutput _output;
         public Universe(IOutput output)
@@ -17,11 +13,6 @@ namespace GameOfLife
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
-            /* Grid = new int[,] {
-                {0,1,0},
-                {1,0,1},
-                {0,1,0},
-            }; */
         }
         public void Initialise()
         {
@@ -37,9 +28,9 @@ namespace GameOfLife
         }
         public void RunGame()
         {
-            SetUpGrid(gridLength, gridWidth);
+            SetUpGrid(Constants.GridLength, Constants.GridWidth);
             Initialise();
-            SwitchCellState(row, col);
+            SwitchCellState(Constants.Row, Constants.Col);
             PrintGrid();
         }
         public void PrintGrid()
@@ -73,6 +64,8 @@ namespace GameOfLife
                 Grid[row + 1, col - 1],
                 Grid[row + 1, col + 1]
             }; 
+            // logic for row = 0 
+            // if neighbour == 
             var count = 0;
             foreach(Cell neighbour in neighbours)
             {
