@@ -18,9 +18,9 @@ namespace GameOfLife
         }
         public void Initialise()
         {
-            for (int row = 0; row < Grid.GetUpperBound(0); row++)
+            for (int row = 0; row <= Grid.GetUpperBound(0); row++)
             {
-                for (int col = 0; col < Grid.GetUpperBound(1); col++)
+                for (int col = 0; col <= Grid.GetUpperBound(1); col++)
                 {
                     Cell cell = new Cell();
                     cell.CellState = State.Alive;

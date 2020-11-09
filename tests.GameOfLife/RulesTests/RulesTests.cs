@@ -26,6 +26,7 @@ namespace tests.GameOfLife
             var grid = new Universe(new StubOutput());
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
             var expected = true;
             // act
             var result = rule.ManageRules(row, col);

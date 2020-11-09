@@ -29,7 +29,10 @@ namespace tests.GameOfLife
             // act
             grid.Initialise();
             // assert
-            Assert.NotNull(grid.Grid);
+            foreach (Cell cell_ in grid.Grid)
+            {
+                Assert.Equal(State.Alive, cell.CellState);
+            }
         }
         [Fact]
         public void Should_Test_PrintGrid()
