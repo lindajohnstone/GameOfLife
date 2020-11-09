@@ -15,7 +15,7 @@ namespace tests.GameOfLife
         public bool ManageRules(int row, int col)
         {
             var count = _grid.HowManyLiveNeighbours(row, col);
-            if (count < 2) return true;
+            if (count < Constants.CountUnderpopulation) return true; 
             return false;
         }
     }

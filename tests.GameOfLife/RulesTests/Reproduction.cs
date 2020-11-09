@@ -5,6 +5,7 @@ namespace tests.GameOfLife
     public class Reproduction : IRules
     {
         GridRepro _grid;
+        const int stateDead = 1;
 
         public Reproduction(GridRepro grid)
         {
@@ -15,7 +16,7 @@ namespace tests.GameOfLife
         {
             var count = _grid.HowManyLiveNeighbours(row, col);
             var cell = _grid.Grid[row, col];
-            if (_grid.Grid[row, col] == 1 && count == 3) return true;
+            if (_grid.Grid[row, col] == stateDead && count == Constants.CountReproduction) return true;
             return false;
         }
     }

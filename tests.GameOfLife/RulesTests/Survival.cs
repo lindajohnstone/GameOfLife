@@ -11,14 +11,15 @@ namespace tests.GameOfLife
         {
             _grid = grid;
         }
+        const int stateAlive = 0;
 
         public bool ManageRules(int row, int col)
         {
             var cell = _grid.Grid[row, col];
             var count = _grid.HowManyLiveNeighbours(row, col);
-            if (cell == 0)
+            if (cell == stateAlive)
             { 
-                if (count == 2 || count == 3) return true;
+                if (count == Constants.CountSurvivalMin || count == Constants.CountSurvivalMax) return true;
             }
             return false;
         }

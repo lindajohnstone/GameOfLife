@@ -5,6 +5,8 @@ namespace tests.GameOfLife
 {
     public class RulesTests
     {
+        const int row = 1;
+        const int col = 1;
         [Fact]
         public void Should_Test_Underpopulation_Rule()
         {
@@ -13,7 +15,7 @@ namespace tests.GameOfLife
             var rule = new Underpop(grid);
             var expected = true;
             // act
-            var result = rule.ManageRules(1,1);
+            var result = rule.ManageRules(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -23,10 +25,10 @@ namespace tests.GameOfLife
             // arrange
             var grid = new Universe(new StubOutput());
             var rule = new OvercrowdingRule(grid);
-            grid.SetUpGrid(3, 3);
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             var expected = true;
             // act
-            var result = rule.ManageRules(1, 1);
+            var result = rule.ManageRules(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -38,7 +40,7 @@ namespace tests.GameOfLife
             var rule = new Survival(grid);
             var expected = true;
             // act
-            var result = rule.ManageRules(1, 1);
+            var result = rule.ManageRules(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -50,7 +52,7 @@ namespace tests.GameOfLife
             var rule = new Reproduction(grid);
             var expected = true;
             // act
-            var result = rule.ManageRules(1,1);
+            var result = rule.ManageRules(row, col);
             // assert
             Assert.Equal(expected, result);
         }

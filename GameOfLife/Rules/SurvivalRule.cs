@@ -6,7 +6,6 @@ namespace GameOfLife
     public class SurvivalRule : IRules
     {
         private Universe _grid;
-        const int liveNeighbours = 3;
         public SurvivalRule(Universe grid)
         {
             _grid = grid;
@@ -18,7 +17,7 @@ namespace GameOfLife
             var count = _grid.HowManyLiveNeighbours(row, col);
             if (cell .CellState == State.Alive)
             {
-                if (count == 2 || count == liveNeighbours) return true; // TODO: add constants to all rules - if used in > 1 page add Constants class
+                if (count == Constants.CountSurvivalMin || count == Constants.CountSurvivalMax) return true; // TODO: add constants to all rules - if used in > 1 page add Constants class
             }
             return false;
         }

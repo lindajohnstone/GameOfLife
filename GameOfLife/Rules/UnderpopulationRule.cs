@@ -12,7 +12,7 @@ namespace GameOfLife
         public bool ManageRules(int cellX, int cellY)
         {
             var count = _grid.HowManyLiveNeighbours(cellX, cellY);
-            if (count < 2) return true;
+            if (count < Constants.CountUnderpopulation) return true;
             return false;
         }
     }
