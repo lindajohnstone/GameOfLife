@@ -4,8 +4,6 @@ namespace GameOfLife
 {
     public class Universe
     {
-        private int line = 1;
-        private int column = 1;
         public Cell[,] Grid { get; private set; } 
         IOutput _output;
         public Universe(IOutput output)
@@ -32,7 +30,7 @@ namespace GameOfLife
         {
             SetUpGrid(Constants.GridLength, Constants.GridWidth);
             Initialise();
-            SwitchCellState(line, column);
+            SwitchCellState(1, 1); // TODO: add to ManageRules later
             PrintGrid();
         }
         public void PrintGrid()
@@ -55,15 +53,33 @@ namespace GameOfLife
         }
         public int HowManyLiveNeighbours(int row, int col)
         {
+            // replace row / col + or - with variables
+            // if row = Grid.GetUpperBound(0)
+            // row - 1 = Grid.GetLowerBound(0)
+            // if row = Grid.GetLowerBound(0)
+            // row + 1 = Grid.GetUpperBound(0)
+            // if col = Grid.GetUpperBound(1)
+            // col - 1 = Grid.GetLowerBound(1)
+            // if col = Grid.GetLowerBound(1)
+            // col + 1 = Grid.GetUpperBound(1)
+            var rowPlusOne = row + 1;
+            var rowMinusOne = row - 1;
+            var colPlusOne = col + 1;
+            var colMinusOne = col -1;
+            if (row == Grid.GetUpperBound(0)) rowPlusOne = Grid.GetLowerBound(0);
+            if (row == Grid.GetLowerBound(0)) rowMinusOne = Grid.GetUpperBound(0);
+            if (col == Grid.GetUpperBound(1)) colPlusOne = Grid.GetLowerBound(1);
+            if (col == Grid.GetLowerBound(1)) colMinusOne = Grid.GetUpperBound(1);
+
             var neighbours = new [] { 
-                Grid[row, col - 1], 
-                Grid[row, col + 1],
-                Grid[row - 1, col],
-                Grid[row + 1, col],
-                Grid[row - 1, col - 1],
-                Grid[row - 1, col + 1],
-                Grid[row + 1, col - 1],
-                Grid[row + 1, col + 1]
+                Grid[row, colMinusOne], 
+                Grid[row, colPlusOne],
+                Grid[rowMinusOne, col],
+                Grid[rowPlusOne, col],
+                Grid[rowMinusOne, colMinusOne],
+                Grid[rowMinusOne, colPlusOne],
+                Grid[rowPlusOne, colMinusOne],
+                Grid[rowPlusOne, colMinusOne]
             }; 
             var count = 0;
             foreach(Cell neighbour in neighbours)

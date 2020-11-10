@@ -50,28 +50,21 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, output.GetWriteLine());
         }
-        [Fact]
-        public void Should_Count_Cell_NeighbourStateAlive()
+        [Theory]
+        [InlineData(1, 1, 8)]
+        [InlineData(2, 1, 8)]
+        [InlineData(0, 1, 8)]
+        [InlineData(Constants.GridLength - 1, Constants.GridWidth - 1, 8)] 
+        public void Should_Count_Cell_NeighbourStateAlive(int row, int col, int expected)
         {
             // arrange
             var grid = new Universe(new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
-            var expected = 8;
             // act
             var result = grid.HowManyLiveNeighbours(row, col);
             // assert 
             Assert.Equal(expected, result);
-        }
-        [Fact]
-        public void Should_Test_HowManyNeighbours_Wrapping()
-        {
-            // arrange
-            
-            // act
-
-            // assert
-
         }
         [Fact]
         public void Should_Test_SwitchCellState()
@@ -80,7 +73,21 @@ namespace tests.GameOfLife
             var grid = new Universe(new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
+            grid.SwitchCellState(row,col);
+            var expected = State.Dead;
+            var cell = grid.Grid[row, col];
+            // assert
+            Assert.Equal(expected, cell.CellState);
+        }
+        [Fact]
+        public void Should_Test_SwitchCellState_After_PrintGrid()
+        {
+            // arrange
+            var grid = new Universe(new StubOutput());
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
             grid.SwitchCellState(1,1);
+            grid.PrintGrid();
             var expected = State.Dead;
             var cell = grid.Grid[row, col];
             // assert
