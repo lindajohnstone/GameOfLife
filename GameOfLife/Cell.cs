@@ -3,43 +3,11 @@ using System;
 namespace GameOfLife
 {
     public class Cell
-    {
-        GridSetUp _grid; 
-        IOutput _output; // TODO: warning: never assigned to and will always have its default value null
-        public Cell(int gridLength, int gridWidth)
+    { 
+        public Cell()
         {
-            _grid = new GridSetUp(_output);
-            _grid.SetUpGrid(gridLength, gridWidth);
+            CellState = State.Alive;
         }
-        public StateEnum State { get; set; }
-
-        public int NeighbourStateAliveCount(int cellX, int cellY)
-        {
-            var neighbours = new [] { 
-                _grid.Grid[cellX, cellY - 1], 
-                _grid.Grid[cellX, cellY + 1],
-                _grid.Grid[cellX - 1, cellY],
-                _grid.Grid[cellX + 1, cellY],
-                _grid.Grid[cellX - 1, cellY - 1],
-                _grid.Grid[cellX - 1, cellY + 1],
-                _grid.Grid[cellX + 1, cellY - 1],
-                _grid.Grid[cellX + 1, cellY + 1]
-            }; 
-            var count = 0;
-            foreach(int neighbour in neighbours)
-            {
-                if(neighbour == 0) 
-                {
-                    count++;
-                }
-            } 
-            return count;
-        }
-
-        public int SwitchState(int cellX, int cellY)
-        {
-            if (_grid.Grid[cellX, cellY] == 0) return 1;
-            return 0;
-        }
+        public State CellState { get; set; }
     }
 }

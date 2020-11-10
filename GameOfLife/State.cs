@@ -1,8 +1,8 @@
 namespace GameOfLife
 {
-    public enum StateEnum
+    public enum State
     {
-        Alive = 0,
+        Alive = 0,       
         Dead = 1
     }
 }

@@ -207,6 +207,7 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
@@ -372,4 +373,9 @@ MigrationBackup/
 # Ignore all local history of files
 .history
 
+# Code Coverage
+coveragereport/
+TestResults/
+
+*.DS_Store
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,csharp

@@ -7,7 +7,7 @@ namespace GameOfLife
         static void Main(string[] args)
         {
             var output = new ConsoleOutput();
-            var grid = new GridSetUp(output);
+            var grid = new Universe(output);
             grid.RunGame();
         }
     }
