@@ -4,8 +4,8 @@ namespace GameOfLife
 {
     public class Universe
     {
-        private int row = 1;
-        private int col = 1;
+        private int line = 1;
+        private int column = 1;
         public Cell[,] Grid { get; private set; } 
         IOutput _output;
         public Universe(IOutput output)
@@ -32,7 +32,7 @@ namespace GameOfLife
         {
             SetUpGrid(Constants.GridLength, Constants.GridWidth);
             Initialise();
-            SwitchCellState(row, col);
+            SwitchCellState(line, column);
             PrintGrid();
         }
         public void PrintGrid()
@@ -41,13 +41,11 @@ namespace GameOfLife
             {
                 for (int col = 0; col < Grid.GetLength(1); col++)
                 {
-                    Cell cell = new Cell();
-                    Grid[row,col] = cell;
-                    if (cell.CellState == State.Alive)
+                    if (Grid[row, col].CellState == State.Alive)
                     {
                         _output.Write("* ");
                     }
-                    else if (cell.CellState == State.Dead)
+                    else if (Grid[row, col].CellState == State.Dead)
                     {
                         _output.Write("  ");
                     }

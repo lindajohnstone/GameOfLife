@@ -6,6 +6,8 @@ namespace tests.GameOfLife
 {
     public class UniverseTests
     {
+        const int row = 1;
+        const int col = 1;
         [Fact]
         public void Should_Test_SetUpGrid()
         {
@@ -55,8 +57,6 @@ namespace tests.GameOfLife
             var grid = new Universe(new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
-            var row = 1;
-            var col = 1;
             var expected = 8;
             // act
             var result = grid.HowManyLiveNeighbours(row, col);
@@ -67,11 +67,24 @@ namespace tests.GameOfLife
         public void Should_Test_HowManyNeighbours_Wrapping()
         {
             // arrange
-
+            
             // act
 
             // assert
 
+        }
+        [Fact]
+        public void Should_Test_SwitchCellState()
+        {
+            // arrange
+            var grid = new Universe(new StubOutput());
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
+            grid.SwitchCellState(1,1);
+            var expected = State.Dead;
+            var cell = grid.Grid[row, col];
+            // assert
+            Assert.Equal(expected, cell.CellState);
         }
     }
 }
