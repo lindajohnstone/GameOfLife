@@ -8,12 +8,15 @@ namespace GameOfLife
         public OvercrowdingRule(Universe grid)
         {
             _grid = grid;
-        }
-
+        } 
         public bool ManageRules(int row, int col)
         {
             var count = _grid.HowManyLiveNeighbours(row, col);
-            if (count > Constants.CountOvercrowding) return true;
+            var cell = _grid.Grid[row, col];
+            if (cell.CellState == State.Alive)
+            {
+                if (count > Constants.CountOvercrowding) return true;
+            }
             return false;
         }
     }

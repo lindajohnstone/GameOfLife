@@ -66,6 +66,20 @@ namespace tests.GameOfLife
             // assert 
             Assert.Equal(expected, result);
         }
+        [Theory]
+        [InlineData(-1, 0)]
+        [InlineData(0, -1)]
+        [InlineData(Constants.GridLength, Constants.GridWidth)]
+        [InlineData(-1, -1)]
+        public void Should_Test_NeighbourStateAlive_Throws_If_Invalid_Input(int row, int col)
+        {
+            // arrange
+            var grid = new Universe(new StubOutput());
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
+            // assert
+            Assert.Throws<IndexOutOfRangeException>(() => grid.HowManyLiveNeighbours(row, col));
+        }
         [Fact]
         public void Should_Test_SwitchCellState()
         {
@@ -92,6 +106,21 @@ namespace tests.GameOfLife
             var cell = grid.Grid[row, col];
             // assert
             Assert.Equal(expected, cell.CellState);
+        }
+        [Fact]
+        public void Should_Test_ManageRules_Changes_CellState()
+        {
+            // arrange
+            var grid = new Universe(new StubOutput());
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
+            var row = 1;
+            var col = 1;
+            var expected = State.Dead;
+            // act
+            grid.ManageRules(row, col);
+            // assert
+            Assert.Equal(expected, grid.Grid[row, col].CellState);
         }
     }
 }

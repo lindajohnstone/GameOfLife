@@ -8,7 +8,7 @@ namespace tests.GameOfLife
         const int row = 1;
         const int col = 1;
         [Fact]
-        public void Should_Test_Underpopulation_Rule()
+        public void Should_Test_UnderpopulationRule_Returns_True()
         {
             // arrange
             var grid = new GridUnderpop();

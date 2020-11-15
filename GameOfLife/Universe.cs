@@ -45,7 +45,7 @@ namespace GameOfLife
                     }
                     else if (Grid[row, col].CellState == State.Dead)
                     {
-                        _output.Write("  ");
+                        _output.Write(". ");
                     }
                 }
                 _output.WriteLine(Environment.NewLine);
@@ -53,19 +53,10 @@ namespace GameOfLife
         }
         public int HowManyLiveNeighbours(int row, int col)
         {
-            // replace row / col + or - with variables
-            // if row = Grid.GetUpperBound(0)
-            // row - 1 = Grid.GetLowerBound(0)
-            // if row = Grid.GetLowerBound(0)
-            // row + 1 = Grid.GetUpperBound(0)
-            // if col = Grid.GetUpperBound(1)
-            // col - 1 = Grid.GetLowerBound(1)
-            // if col = Grid.GetLowerBound(1)
-            // col + 1 = Grid.GetUpperBound(1)
             var rowPlusOne = row + 1;
             var rowMinusOne = row - 1;
             var colPlusOne = col + 1;
-            var colMinusOne = col -1;
+            var colMinusOne = col - 1;
             if (row == Grid.GetUpperBound(0)) rowPlusOne = Grid.GetLowerBound(0);
             if (row == Grid.GetLowerBound(0)) rowMinusOne = Grid.GetUpperBound(0);
             if (col == Grid.GetUpperBound(1)) colPlusOne = Grid.GetLowerBound(1);
@@ -96,6 +87,13 @@ namespace GameOfLife
             var cell = Grid[row, col];
             cell.CellState = cell.CellState == State.Alive ? State.Dead : State.Alive;
             Grid[row, col] = cell;
+        }
+
+        public void ManageRules(int row, int col)
+        {
+            // loop through all rules
+            // if any true
+            // switch the cell state
         }
     }
 }
