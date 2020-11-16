@@ -10,14 +10,7 @@ namespace GameOfLife
         {
             var output = new ConsoleOutput();
             var grid = new Universe();
-            var rules = new IRules[] 
-            {
-                new OvercrowdingRule(grid),
-                new ReproductionRule(grid),
-                new SurvivalRule(grid),
-                new UnderpopulationRule(grid)
-            };
-            var game = new GameController(output, grid, rules);
+            var game = new GameController(output, grid);
             game.RunGame();
         }
     }

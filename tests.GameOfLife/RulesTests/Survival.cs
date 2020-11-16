@@ -13,7 +13,7 @@ namespace tests.GameOfLife
         }
         const int stateAlive = 0;
 
-        public bool ManageRules(int row, int col)
+        public bool CheckRules(int row, int col)
         {
             var cell = _grid.Grid[row, col];
             var count = _grid.HowManyLiveNeighbours(row, col);

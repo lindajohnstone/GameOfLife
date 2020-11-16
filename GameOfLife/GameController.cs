@@ -8,17 +8,23 @@ namespace GameOfLife
         IOutput _output;
         Universe _grid = new Universe();
         IRules[] _rules;
-        public GameController(IOutput output, Universe grid, IRules[] rules)
+        public GameController(IOutput output, Universe grid)
         {
             _output = output;
             _grid = grid;
-            _rules = rules;
+            _rules = new IRules[] 
+            {
+                new OvercrowdingRule(_grid),
+                new ReproductionRule(_grid),
+                new SurvivalRule(_grid),
+                new UnderpopulationRule(_grid)
+            };
         }
         public void RunGame()
         {
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
-            SwitchCellState(1, 1); // TODO: add to ManageRules later
+            LoopThroughEachCell();
             PrintGrid();
         }
             public void PrintGrid()
@@ -39,49 +45,22 @@ namespace GameOfLife
                 _output.WriteLine(Environment.NewLine);
             }
         }
-        public int HowManyLiveNeighbours(int row, int col)
+        
+        
+        public void CheckRules(int row, int col)
         {
-            var rowPlusOne = row + 1;
-            var rowMinusOne = row - 1;
-            var colPlusOne = col + 1;
-            var colMinusOne = col - 1;
-            if (row == _grid.Grid.GetUpperBound(0)) rowPlusOne = _grid.Grid.GetLowerBound(0);
-            if (row == _grid.Grid.GetLowerBound(0)) rowMinusOne = _grid.Grid.GetUpperBound(0);
-            if (col == _grid.Grid.GetUpperBound(1)) colPlusOne = _grid.Grid.GetLowerBound(1);
-            if (col == _grid.Grid.GetLowerBound(1)) colMinusOne = _grid.Grid.GetUpperBound(1);
+            if (_rules.Any(_ => _.CheckRules(row, col))) _grid.SwitchCellState(row, col);
+        }
 
-            var neighbours = new [] { 
-                _grid.Grid[row, colMinusOne], 
-                _grid.Grid[row, colPlusOne],
-                _grid.Grid[rowMinusOne, col],
-                _grid.Grid[rowPlusOne, col],
-                _grid.Grid[rowMinusOne, colMinusOne],
-                _grid.Grid[rowMinusOne, colPlusOne],
-                _grid.Grid[rowPlusOne, colMinusOne],
-                _grid.Grid[rowPlusOne, colMinusOne]
-            }; 
-            var count = 0;
-            foreach(Cell neighbour in neighbours)
+        public void LoopThroughEachCell()
+        {
+            for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
-                if(neighbour.CellState == State.Alive) 
+                for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)
                 {
-                    count++;
+                    CheckRules(row, col);
                 }
-            } 
-            return count;
-        }
-        public void SwitchCellState(int row, int col)
-        {
-            var cell = _grid.Grid[row, col];
-            cell.CellState = cell.CellState == State.Alive ? State.Dead : State.Alive;
-            _grid.Grid[row, col] = cell;
-        }
-        public void ManageRules(int row, int col)
-        {
-            // loop through all rules
-            // if any true
-            // switch the cell state
-            if (_rules.Any(_ => _.ManageRules(row, col))) SwitchCellState(row, col);
+            }
         }
     }
 }
