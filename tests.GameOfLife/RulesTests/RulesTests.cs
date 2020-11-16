@@ -23,7 +23,7 @@ namespace tests.GameOfLife
         public void Should_Test_Overcrowding_Rule()
         {
             // arrange
-            var grid = new Universe(new StubOutput());
+            var grid = new Universe();
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
