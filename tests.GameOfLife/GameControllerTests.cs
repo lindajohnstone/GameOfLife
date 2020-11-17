@@ -1,6 +1,7 @@
 using System;
 using GameOfLife;
 using Xunit;
+using Moq;
 
 namespace tests.GameOfLife
 {
@@ -119,24 +120,29 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
         }
-        [Fact]
-        public void Should_Test_QuitGame_Using_UserInput()
+        [Theory]
+        [InlineData(ConsoleKey.Q, true)]
+        [InlineData(ConsoleKey.X, false)]
+        public void Should_Test_QuitGame_Using_UserInput(ConsoleKey consoleKey, bool expected)
         {
             // arrange
-            var input = new StubInput();
-            var grid = new Universe();
-           /*  var rules = new IRules[] 
-            {
-                new OvercrowdingRule(grid),
-                new ReproductionRule(grid),
-                new SurvivalRule(grid),
-                new UnderpopulationRule(grid)
-            }; */
-            var game = new GameController(new StubOutput(), new Universe());
+            var endGame = new QuitGame();
             // act
-
+            var result = endGame.ReadKeyToQuit(consoleKey);
             // assert
-
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void Should_Test_CancelKeyPressControlC()
+        {
+            // arrange
+            var endGame = new QuitGame();
+            var consoleKey = ConsoleSpecialKey.ControlC;
+            var expected = true;
+            // act
+            var result = endGame.CancelKeyPressControlC(consoleKey);            
+            // assert
+            Assert.Equal(expected, result);
         }
     }
 }
