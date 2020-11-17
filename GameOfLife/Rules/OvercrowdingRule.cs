@@ -5,8 +5,6 @@ namespace GameOfLife
     public class OvercrowdingRule : IRules
     {
         Universe _grid;
-        GameController _game;
-        IOutput _output;
         public OvercrowdingRule(Universe grid)
         {
             _grid = grid;

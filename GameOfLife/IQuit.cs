@@ -6,5 +6,6 @@ namespace GameOfLife
     {
         public bool CancelKeyPressControlC(ConsoleSpecialKey consoleKey);
         public bool ReadKeyToQuit(ConsoleKey consoleKey);
+        public void Quit();
     }
 }

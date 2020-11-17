@@ -8,6 +8,7 @@ namespace GameOfLife
         IOutput _output;
         Universe _grid = new Universe();
         IRules[] _rules;
+        IQuit _quitGame;
         public GameController(IOutput output, Universe grid)
         {
             _output = output;
@@ -19,13 +20,18 @@ namespace GameOfLife
                 new SurvivalRule(_grid),
                 new UnderpopulationRule(_grid)
             };
+            _quitGame = new QuitGame();
         }
         public void RunGame()
         {
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
-            LoopThroughEachCell();
-            PrintGrid();
+            //do 
+            //{
+                LoopThroughEachCell();
+                PrintGrid();
+            //}
+            
         }
             public void PrintGrid()
         {

@@ -5,8 +5,6 @@ namespace GameOfLife
     public class UnderpopulationRule : IRules
     {
         private Universe _grid;
-        private IOutput _output;
-        private GameController _game;
         public UnderpopulationRule(Universe grid)
         {
             _grid = grid;

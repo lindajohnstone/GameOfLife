@@ -1,8 +1,9 @@
 using System;
+using GameOfLife;
 
-namespace GameOfLife
+namespace tests.GameOfLife
 {
-    public class QuitGame : IQuit
+    public class StubQuit : IQuit
     {
         public bool CancelKeyPressControlC(ConsoleSpecialKey consoleKey)
         {

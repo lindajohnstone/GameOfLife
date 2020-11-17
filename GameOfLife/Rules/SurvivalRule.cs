@@ -6,8 +6,6 @@ namespace GameOfLife
     public class SurvivalRule : IRules
     {
         private Universe _grid;
-        private IOutput _output;
-        private GameController _game;
         public SurvivalRule(Universe grid)
         {
             _grid = grid;

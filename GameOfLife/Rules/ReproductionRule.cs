@@ -3,8 +3,6 @@ namespace GameOfLife
     public class ReproductionRule : IRules
     {
         Universe _grid;
-        GameController _game;
-        IOutput _output;
         public ReproductionRule(Universe grid)
         {
             _grid = grid;
