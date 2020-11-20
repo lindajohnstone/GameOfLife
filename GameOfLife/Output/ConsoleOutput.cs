@@ -4,6 +4,13 @@ namespace GameOfLife
 {
     public class ConsoleOutput : IOutput
     {
+        public void Clear()
+        {
+            Console.CursorVisible = false;
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+        }
+
         public void Write(string v)
         {
             Console.Write(v);

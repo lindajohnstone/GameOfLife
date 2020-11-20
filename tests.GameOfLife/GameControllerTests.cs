@@ -2,6 +2,8 @@ using System;
 using GameOfLife;
 using Xunit;
 using Moq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace tests.GameOfLife
 {
@@ -10,11 +12,11 @@ namespace tests.GameOfLife
         const int row = 1;
         const int col = 1;
         [Fact]
-        public void Should_Test_ManageRules_Changes_CellState()
+        public void Should_Test_CheckRules_Changes_CellState()
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid);
+            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             var row = 1;
@@ -30,7 +32,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid);
+            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(1,1);
@@ -45,7 +47,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid);
+            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
@@ -79,7 +81,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid);
+            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             // assert
@@ -91,7 +93,7 @@ namespace tests.GameOfLife
             // arrange
             var output = new StubOutput();
             var grid = new Universe();
-            var game = new GameController(output, grid);
+            var game = new GameController(output, grid, new StubInput(), new ConsoleQuit());
             var expected = "* ";
             // act
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
@@ -114,35 +116,23 @@ namespace tests.GameOfLife
                 new SurvivalRule(grid),
                 new UnderpopulationRule(grid)
             };
-            var game = new GameController(new StubOutput(), grid);
+            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
             // act
             game.LoopThroughEachCell();
             // assert
             Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
         }
-        [Theory]
-        [InlineData(ConsoleKey.Q, true)]
-        [InlineData(ConsoleKey.X, false)]
-        public void Should_Test_QuitGame_Using_UserInput(ConsoleKey consoleKey, bool expected)
-        {
-            // arrange
-            var endGame = new QuitGame();
-            // act
-            var result = endGame.ReadKeyToQuit(consoleKey);
-            // assert
-            Assert.Equal(expected, result);
-        }
         [Fact]
-        public void Should_Test_CancelKeyPressControlC()
+        public void Should_Test_GetUserInput_Is_ConsoleKey()
         {
             // arrange
-            var endGame = new QuitGame();
-            var consoleKey = ConsoleSpecialKey.ControlC;
-            var expected = true;
+            var input = new StubQuit();
+            var expected = "Q";
             // act
-            var result = endGame.CancelKeyPressControlC(consoleKey);            
+            var result = input.CheckUserInput();
             // assert
             Assert.Equal(expected, result);
+
         }
     }
 }

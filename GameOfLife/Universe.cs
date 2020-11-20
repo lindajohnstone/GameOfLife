@@ -20,7 +20,6 @@ namespace GameOfLife
                     Grid[row, col] = cell;
                 }
             }
-            
         }
         public int HowManyLiveNeighbours(int row, int col)
         {

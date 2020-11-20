@@ -5,20 +5,15 @@ namespace tests.GameOfLife
 {
     public class StubQuit : IQuit
     {
-        public bool CancelKeyPressControlC(ConsoleSpecialKey consoleKey)
+        private string _userInput = "Q";
+        public string CheckUserInput()
         {
-            return Console.TreatControlCAsInput = true;
+            return _userInput;
         }
 
         public void Quit()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool ReadKeyToQuit(ConsoleKey consoleKey)
-        {
-            if (consoleKey == ConsoleKey.Q) return true;
-            return false;
+            _userInput = "Q";
         }
     }
 }

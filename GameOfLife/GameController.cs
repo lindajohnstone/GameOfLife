@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace GameOfLife
 {
     public class GameController
     {
         IOutput _output;
+        IInput _input;
         Universe _grid = new Universe();
         IRules[] _rules;
         IQuit _quitGame;
-        public GameController(IOutput output, Universe grid)
+        private Queue<char> queue;
+        public GameController(IOutput output, Universe grid, IInput input, IQuit quitGame)
         {
             _output = output;
             _grid = grid;
+            _input = input;
+            _quitGame = quitGame;
             _rules = new IRules[] 
             {
                 new OvercrowdingRule(_grid),
@@ -20,20 +26,25 @@ namespace GameOfLife
                 new SurvivalRule(_grid),
                 new UnderpopulationRule(_grid)
             };
-            _quitGame = new QuitGame();
         }
         public void RunGame()
         {
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
-            //do 
-            //{
+            var endGame = false;
+            while(true)
+            {
                 LoopThroughEachCell();
                 PrintGrid();
-            //}
+                Thread.Sleep(500);
+                if (_quitGame.CheckUserInput()) endGame = true;
+                //endGame = _quitGame.Quit();
+                //_quitGame.Quit();
+                _output.Clear();
+            }
             
         }
-            public void PrintGrid()
+        public void PrintGrid()
         {
             for (int row = 0; row < _grid.Grid.GetLength(0); row++)
             {
