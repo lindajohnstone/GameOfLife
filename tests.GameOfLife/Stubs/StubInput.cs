@@ -9,19 +9,19 @@ namespace tests.GameOfLife
         private string _readKey;
         private string _userInput = "Q";
 
-        public string ReadKey()
+        public ConsoleKeyInfo ReadKey()
         {
-            return Console.ReadKey().ToString();
+            return Console.ReadKey();
         }
 
-        internal bool ConsoleKeyAvailable()
+        public bool ConsoleKeyAvailable()
         {
             return Console.KeyAvailable;
         }
 
-        public string ReadKey(bool value)
+        public ConsoleKeyInfo ReadKey(bool value)
         {
-            return Console.ReadKey().ToString();
+            return Console.ReadKey();
         }
 
         public string ReadLine()

@@ -14,9 +14,9 @@ namespace GameOfLife
             return Console.KeyAvailable;
         }
 
-        public string ReadKey(bool value)
+        public ConsoleKeyInfo ReadKey(bool value)
         {
-           return Console.ReadKey(value).ToString();
+           return Console.ReadKey(value);
         }
 
         public string ReadLine()

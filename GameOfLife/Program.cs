@@ -12,8 +12,7 @@ namespace GameOfLife
             var output = new ConsoleOutput();
             var grid = new Universe();
             var input = new ConsoleInput();
-            var quitGame = new ConsoleQuit();
-            var game = new GameController(output, grid, input, quitGame);
+            var game = new GameController(output, grid, input);
             game.RunGame();
         }
 

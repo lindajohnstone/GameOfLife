@@ -16,7 +16,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(new StubOutput(), grid, new StubInput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             var row = 1;
@@ -32,7 +32,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(new StubOutput(), grid, new StubInput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(1,1);
@@ -47,7 +47,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(new StubOutput(), grid, new StubInput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
@@ -81,7 +81,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(new StubOutput(), grid, new StubInput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             // assert
@@ -93,7 +93,7 @@ namespace tests.GameOfLife
             // arrange
             var output = new StubOutput();
             var grid = new Universe();
-            var game = new GameController(output, grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(output, grid, new StubInput());
             var expected = "* ";
             // act
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
@@ -116,35 +116,11 @@ namespace tests.GameOfLife
                 new SurvivalRule(grid),
                 new UnderpopulationRule(grid)
             };
-            var game = new GameController(new StubOutput(), grid, new StubInput(), new ConsoleQuit());
+            var game = new GameController(new StubOutput(), grid, new StubInput());
             // act
             game.LoopThroughEachCell();
             // assert
             Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
-        }
-        [Fact]
-        public void Should_Test_RunGame_ReadKey_Input()
-        {
-            // arrange
-            var grid = new Universe();
-            var userInput = "Q";
-            var input = new StubInput().WithReadKey(userInput);
-            var quit = new StubQuit(input);
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-            grid.Initialise();
-            var rules = new IRules[] 
-            {
-                new OvercrowdingRule(grid),
-                new ReproductionRule(grid),
-                new SurvivalRule(grid),
-                new UnderpopulationRule(grid)
-            };
-            var game = new GameController(new StubOutput(), grid, input, quit);
-            var expected = "Q";
-            // act
-            quit.CheckUserInput();
-            // assert
-            Assert.Equal(expected, input);
         }
     }
 }

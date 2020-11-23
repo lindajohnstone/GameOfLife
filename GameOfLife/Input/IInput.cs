@@ -1,8 +1,11 @@
+using System;
+
 namespace GameOfLife
 {
     public interface IInput
     {
         string ReadLine();
-        string ReadKey(bool value);
+        ConsoleKeyInfo ReadKey(bool value);
+        bool ConsoleKeyAvailable();
     }
 }
