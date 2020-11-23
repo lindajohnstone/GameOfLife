@@ -4,10 +4,19 @@ namespace GameOfLife
 {
     public class ConsoleInput : IInput
     {
-        public bool KeyAvailable { get;}
-        public char ReadKey(bool value)
+        public bool ConsoleCancelKeyPress()
         {
-           return Console.ReadKey(value).KeyChar;
+            return Console.TreatControlCAsInput;
+        }
+
+        public bool ConsoleKeyAvailable()
+        {
+            return Console.KeyAvailable;
+        }
+
+        public string ReadKey(bool value)
+        {
+           return Console.ReadKey(value).ToString();
         }
 
         public string ReadLine()

@@ -6,15 +6,22 @@ namespace tests.GameOfLife
     public class StubInput : IInput
     {
         private string _readLine;
+        private string _readKey;
+        private string _userInput = "Q";
 
-        public char ReadKey()
+        public string ReadKey()
         {
-            return Console.ReadKey().KeyChar;
+            return Console.ReadKey().ToString();
         }
 
-        public char ReadKey(bool value)
+        internal bool ConsoleKeyAvailable()
         {
-            return Console.ReadKey().KeyChar;
+            return Console.KeyAvailable;
+        }
+
+        public string ReadKey(bool value)
+        {
+            return Console.ReadKey().ToString();
         }
 
         public string ReadLine()
@@ -25,6 +32,11 @@ namespace tests.GameOfLife
         public StubInput WithReadLine(string value) 
         {
             _readLine = value;
+            return this;
+        }
+        public StubInput WithReadKey(string _userInput)
+        {
+            _readKey = _userInput;
             return this;
         }
     }

@@ -4,7 +4,7 @@ namespace GameOfLife
 {
     public interface IQuit
     {
-        public void Quit();
+        public bool Quit();
         public bool CheckUserInput();
     }
 }

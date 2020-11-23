@@ -1,27 +1,28 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace GameOfLife
 {
     public class ConsoleQuit : IQuit
     {
-         
-        private string _userInput;
-      /*   public void CheckUserInput()
+        ConsoleInput _input;
+        public string _userInput;
+        public ConsoleQuit()
         {
-            _userInput = GetUserInput();
-        } */
-        public void Quit()
+            _input = new ConsoleInput();
+        }
+        public bool Quit()
         {
-            _userInput = "Q";
+            return CheckUserInput();
         }
         public bool CheckUserInput()
         {
-            if(!Console.KeyAvailable) return false;
-            var _userInput = Console.ReadKey(true);
-            if (_userInput.ToString() == "Q") return true;
-            return false;
+            if (!Console.KeyAvailable) return true;
+            _userInput = Console.ReadKey(true).ToString();
+            if(_userInput.Equals("Q")) return false;
+            return true;
         }
     }
 }

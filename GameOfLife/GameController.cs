@@ -12,7 +12,7 @@ namespace GameOfLife
         Universe _grid = new Universe();
         IRules[] _rules;
         IQuit _quitGame;
-        private Queue<char> queue;
+        //private Queue<char> queue;
         public GameController(IOutput output, Universe grid, IInput input, IQuit quitGame)
         {
             _output = output;
@@ -31,19 +31,19 @@ namespace GameOfLife
         {
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
-            var endGame = false;
+            //var endGame = false;
             while(true)
             {
-                LoopThroughEachCell();
                 PrintGrid();
+                LoopThroughEachCell();
                 Thread.Sleep(500);
-                if (_quitGame.CheckUserInput()) endGame = true;
-                //endGame = _quitGame.Quit();
-                //_quitGame.Quit();
+                _quitGame.Quit();
                 _output.Clear();
             }
             
+                //_quitGame.Quit();
         }
+
         public void PrintGrid()
         {
             for (int row = 0; row < _grid.Grid.GetLength(0); row++)

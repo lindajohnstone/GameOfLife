@@ -123,16 +123,28 @@ namespace tests.GameOfLife
             Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
         }
         [Fact]
-        public void Should_Test_GetUserInput_Is_ConsoleKey()
+        public void Should_Test_RunGame_ReadKey_Input()
         {
             // arrange
-            var input = new StubQuit();
+            var grid = new Universe();
+            var userInput = "Q";
+            var input = new StubInput().WithReadKey(userInput);
+            var quit = new StubQuit(input);
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
+            var rules = new IRules[] 
+            {
+                new OvercrowdingRule(grid),
+                new ReproductionRule(grid),
+                new SurvivalRule(grid),
+                new UnderpopulationRule(grid)
+            };
+            var game = new GameController(new StubOutput(), grid, input, quit);
             var expected = "Q";
             // act
-            var result = input.CheckUserInput();
+            quit.CheckUserInput();
             // assert
-            Assert.Equal(expected, result);
-
+            Assert.Equal(expected, input);
         }
     }
 }
