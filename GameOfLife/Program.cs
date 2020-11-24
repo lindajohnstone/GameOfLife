@@ -8,17 +8,13 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            // Console.CancelKeyPress += HandleCancelKeyPress;
+            //Console.CancelKeyPress 
             var output = new ConsoleOutput();
             var grid = new Universe();
             var input = new ConsoleInput();
             var game = new GameController(output, grid, input);
+            input.ConsoleCancelKeyPress();
             game.RunGame();
-        }
-
-        private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs args)
-        {
-            args.Cancel = true;
         }
     }
 }

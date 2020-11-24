@@ -4,9 +4,9 @@ namespace GameOfLife
 {
     public class ConsoleInput : IInput
     {
-        public bool ConsoleCancelKeyPress()
+        public void ConsoleCancelKeyPress()
         {
-            return Console.TreatControlCAsInput;
+            Console.CancelKeyPress += HandleCancelKeyPress;
         }
 
         public bool ConsoleKeyAvailable()
@@ -22,6 +22,10 @@ namespace GameOfLife
         public string ReadLine()
         {
             return Console.ReadLine();
+        }
+        private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs args)
+        {
+            args.Cancel = true;
         }
     }
 }

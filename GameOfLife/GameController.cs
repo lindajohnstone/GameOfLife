@@ -32,10 +32,10 @@ namespace GameOfLife
             {
                 while(!_input.ConsoleKeyAvailable())
                 {
+                    _output.Clear();
                     PrintGrid();
                     LoopThroughEachCell();
-                    Thread.Sleep(500);
-                    _output.Clear();
+                    Thread.Sleep(200);
                 }
             }
             while (_input.ReadKey(true).Key != ConsoleKey.Q);  
@@ -66,15 +66,20 @@ namespace GameOfLife
             if (_rules.Any(_ => _.CheckRules(row, col))) _grid.SwitchCellState(row, col);
         }
 
-        public void LoopThroughEachCell()
+        public Universe LoopThroughEachCell()
         {
+            var _nextGrid = new Universe();
+            _nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
                 for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)
                 {
                     CheckRules(row, col);
+                    _grid.Grid[row, col].CellState = _nextGrid.Grid[row, col].CellState;
                 }
             }
+            return new Universe();
         }
     }
 }

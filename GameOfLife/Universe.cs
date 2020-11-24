@@ -9,6 +9,10 @@ namespace GameOfLife
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
         }
+        /* public Universe(Cell[,] grid)
+        {
+            Grid  = grid;
+        } */
         public void Initialise()
         {
             for (int row = 0; row <= Grid.GetUpperBound(0); row++)
