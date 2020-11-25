@@ -8,13 +8,14 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            //Console.CancelKeyPress 
             var output = new ConsoleOutput();
             var grid = new Universe();
             var input = new ConsoleInput();
-            var game = new GameController(output, grid, input);
+            var game = new GameController(grid);
             input.ConsoleCancelKeyPress();
-            game.RunGame();
+            var generator = new UniverseGenerator(output, grid,input, game);
+            generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
+            generator.RunGame();
         }
     }
 }
