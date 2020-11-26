@@ -6,7 +6,6 @@ namespace GameOfLife
     {
         Universe _grid = new Universe();
         IRules[] _rules;
-        Universe _nextGrid = new Universe();
         public GameController(Universe grid)
         {
             _grid = grid;
@@ -26,17 +25,18 @@ namespace GameOfLife
 
         public Universe LoopThroughEachCell()
         {
-            _nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            Universe nextGrid = new Universe();
+            nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
 
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
                 for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)
                 {
                     CheckRules(row, col);
-                    _nextGrid.Grid[row, col] = _grid.Grid[row, col];
+                    nextGrid.Grid[row, col] = _grid.Grid[row, col];
                 }
             }
-            return _nextGrid;
+            return nextGrid;
         }
     }
 }
