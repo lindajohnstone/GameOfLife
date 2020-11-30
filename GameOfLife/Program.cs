@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace GameOfLife
 {
@@ -6,9 +8,20 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            var output = new ConsoleOutput();
-            var grid = new Universe(output);
-            grid.RunGame();
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+
+            using (var serviceProvider = services.BuildServiceProvider())
+            {
+                var app = serviceProvider.GetService<MyApplication>();
+                app.Run();
+            }
+        }
+
+        private static void ConfigureServices(ServiceCollection services)
+        {
+            services.AddLogging(configure => configure.AddConsole())
+                    .AddTransient<MyApplication>();
         }
     }
 }
