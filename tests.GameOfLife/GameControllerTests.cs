@@ -93,12 +93,10 @@ namespace tests.GameOfLife
             // arrange
             var output = new StubOutput();
             var grid = new Universe();
-            var game = new GameController(grid);
             var expected = "* ";
             // act
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-            grid.Initialise();
-            
+            grid.Initialise(); 
             //HandlePrintGrid();
             // assert
             Assert.Equal(expected, output.GetWriteLine());

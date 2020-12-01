@@ -5,14 +5,14 @@ namespace GameOfLife
     public class Universe
     {
         public Cell[,] Grid { get; private set; } 
+        public Universe()
+        {
+            
+        } 
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
         }
-        /* public Universe(Cell[,] grid)
-        {
-            Grid  = grid;
-        } */
         public void Initialise()
         {
             for (int row = 0; row <= Grid.GetUpperBound(0); row++)

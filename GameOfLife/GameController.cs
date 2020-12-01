@@ -1,11 +1,15 @@
+using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace GameOfLife
 {
     public class GameController
     {
-        Universe _grid = new Universe();
+        Universe _grid;
         IRules[] _rules;
+        IOutput _output;
+
         public GameController(Universe grid)
         {
             _grid = grid;
@@ -36,7 +40,10 @@ namespace GameOfLife
                     nextGrid.Grid[row, col] = _grid.Grid[row, col];
                 }
             }
-            return nextGrid;
+            _grid = nextGrid;
+            var hashCode = _grid.GetHashCode();
+            _output.WriteLine($"This is the hash code from LoopThroughEachCell: {hashCode}");
+            return _grid;
         }
     }
 }
