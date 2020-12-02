@@ -42,7 +42,7 @@ namespace GameOfLife
             }
             _grid = nextGrid;
             var hashCode = _grid.GetHashCode();
-            _output.WriteLine($"This is the hash code from LoopThroughEachCell: {hashCode}");
+            //_output.WriteLine($"This is the hash code from LoopThroughEachCell: {hashCode}");
             return _grid;
         }
     }

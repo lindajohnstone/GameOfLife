@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace tests.GameOfLife
 {
-    
-
     public class GameControllerTests
     {
         const int row = 1;
@@ -25,31 +23,15 @@ namespace tests.GameOfLife
             grid.Initialise();
             var row = 1;
             var col = 1;
-            //var expected = State.Dead;
             // act
-            game.CheckRules(row, col);
+            game.CheckRules(cellX, cellY);
             // assert
             Assert.Equal(expected, grid.Grid[row, col].CellState);
         }
-        [Fact]
-        public void Should_Test_SwitchCellState_After_PrintGrid()
-        {
-            // arrange
-            var grid = new Universe();
-            var game = new GameController(grid);
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-            grid.Initialise();
-            grid.SwitchCellState(1,1);
-            //HandlePrintGrid();
-            var expected = State.Dead;
-            var cell = grid.Grid[row, col];
-            // assert
-            Assert.Equal(expected, cell.CellState);
-        } 
         [Theory]
         [InlineData(1,1, State.Dead)]
         [InlineData(1,2, State.Alive)]
-        public void Should_Test_SwitchCellState(int row, int col, State expected)
+        public void Should_Test_SwitchCellState(int cellX, int cellY, State expected)
         {
             // arrange
             var grid = new Universe();
@@ -57,8 +39,7 @@ namespace tests.GameOfLife
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
-            //var expected = State.Dead;
-            var cell = grid.Grid[row, col];
+            var cell = grid.Grid[cellX, cellY];
             // assert
             Assert.Equal(expected, cell.CellState);
         }
@@ -93,9 +74,14 @@ namespace tests.GameOfLife
             // assert
             Assert.Throws<IndexOutOfRangeException>(() => grid.HowManyLiveNeighbours(row, col));
         }
-        
-        [Fact]
-        public void Should_Check_Each_Cell_In_Grid()
+        [Theory]
+        [InlineData(1,1,State.Dead)]
+        [InlineData(0,0,State.Dead)]
+        [InlineData(0,1,State.Dead)]
+        [InlineData(0,2,State.Dead)]
+        [InlineData(1,0,State.Dead)]
+        [InlineData(1,2,State.Alive)] // fails
+        public void Should_Check_LoopThroughEachCell(int cellX, int cellY, State expected) // TODO: change method name
         {
             // arrange
             var grid = new Universe();
@@ -112,7 +98,7 @@ namespace tests.GameOfLife
             // act
             game.LoopThroughEachCell();
             // assert
-            Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
+            Assert.Equal(expected, grid.Grid[cellX, cellY].CellState);
         }
     }
 }

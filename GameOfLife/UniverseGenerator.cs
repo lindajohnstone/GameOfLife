@@ -31,7 +31,6 @@ namespace GameOfLife
             _game = game;
             _universeGeneratorLogger = universeGeneratorLogger;
         }
-        
         public void RunGame()
         {
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
