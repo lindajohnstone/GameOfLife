@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace tests.GameOfLife
 {
+    
+
     public class GameControllerTests
     {
         const int row = 1;
         const int col = 1;
-        [Fact]
-        public void Should_Test_CheckRules_Changes_CellState()
+        [Theory]
+        [InlineData(1,1,State.Dead)]
+        [InlineData(2,2,State.Alive)]
+        public void Should_Test_CheckRules_Changes_CellState(int cellX, int cellY, State expected)
         {
             // arrange
             var grid = new Universe();
@@ -21,7 +25,7 @@ namespace tests.GameOfLife
             grid.Initialise();
             var row = 1;
             var col = 1;
-            var expected = State.Dead;
+            //var expected = State.Dead;
             // act
             game.CheckRules(row, col);
             // assert
@@ -42,8 +46,10 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, cell.CellState);
         } 
-        [Fact]
-        public void Should_Test_SwitchCellState()
+        [Theory]
+        [InlineData(1,1, State.Dead)]
+        [InlineData(1,2, State.Alive)]
+        public void Should_Test_SwitchCellState(int row, int col, State expected)
         {
             // arrange
             var grid = new Universe();
@@ -51,7 +57,7 @@ namespace tests.GameOfLife
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
-            var expected = State.Dead;
+            //var expected = State.Dead;
             var cell = grid.Grid[row, col];
             // assert
             Assert.Equal(expected, cell.CellState);
@@ -87,20 +93,7 @@ namespace tests.GameOfLife
             // assert
             Assert.Throws<IndexOutOfRangeException>(() => grid.HowManyLiveNeighbours(row, col));
         }
-        [Fact]
-        public void Should_Test_PrintGrid()
-        {
-            // arrange
-            var output = new StubOutput();
-            var grid = new Universe();
-            var expected = "* ";
-            // act
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-            grid.Initialise(); 
-            //HandlePrintGrid();
-            // assert
-            Assert.Equal(expected, output.GetWriteLine());
-        }
+        
         [Fact]
         public void Should_Check_Each_Cell_In_Grid()
         {

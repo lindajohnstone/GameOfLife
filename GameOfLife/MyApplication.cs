@@ -5,10 +5,12 @@ namespace GameOfLife
     public class MyApplication
     {
         private readonly ILogger<MyApplication> _logger;
+        private readonly ILogger<UniverseGenerator> _universeGeneratorLogger;
 
-        public MyApplication(ILogger<MyApplication> logger)
+        public MyApplication(ILogger<MyApplication> logger, ILogger<UniverseGenerator> universeGeneratorLogger)
         {
             _logger = logger;
+            _universeGeneratorLogger = universeGeneratorLogger;
         }
         internal void Run()
         {
@@ -18,7 +20,7 @@ namespace GameOfLife
             var input = new ConsoleInput();
             var game = new GameController(grid);
             input.ConsoleCancelKeyPress();
-            var generator = new UniverseGenerator(output, grid, input, game);
+            var generator = new UniverseGenerator(output, grid, input, game, _universeGeneratorLogger);
             generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
             generator.RunGame();
             _logger.LogInformation("Finish running");

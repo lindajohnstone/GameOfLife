@@ -6,7 +6,7 @@ namespace tests.GameOfLife
     public class Underpop : IRules
     {
         GridUnderpop _grid;
-
+        const State stateAlive = State.Alive;
         public Underpop(GridUnderpop grid)
         {
             _grid = grid;
@@ -14,9 +14,13 @@ namespace tests.GameOfLife
 
         public bool CheckRules(int row, int col)
         {
+            var cell = _grid.Grid[row, col];
             var count = _grid.HowManyLiveNeighbours(row, col);
-            if (count < Constants.CountUnderpopulation) return true; 
-            return false;
+            if (cell == (int)stateAlive)
+            {
+                if (count < Constants.CountUnderpopulation) return true;
+            } 
+            return false; 
         }
     }
 }

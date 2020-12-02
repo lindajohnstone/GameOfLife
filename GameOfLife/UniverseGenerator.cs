@@ -13,9 +13,10 @@ namespace GameOfLife
         IRules[] _rules;
         Universe _nextGrid = new Universe();
         GameController _game;
+        private readonly ILogger<UniverseGenerator> _universeGeneratorLogger;
 
         public event GridPrintEventHandler PrintGrid;
-        public UniverseGenerator(IOutput output, Universe grid, IInput input, GameController game)
+        public UniverseGenerator(IOutput output, Universe grid, IInput input, GameController game, ILogger<UniverseGenerator> universeGeneratorLogger)
         {
             _output = output;
             _grid = grid;
@@ -28,6 +29,7 @@ namespace GameOfLife
                 new UnderpopulationRule(_grid)
             };
             _game = game;
+            _universeGeneratorLogger = universeGeneratorLogger;
         }
         
         public void RunGame()
@@ -35,12 +37,13 @@ namespace GameOfLife
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
             var grid = _grid;
-            
+            _universeGeneratorLogger.LogInformation("New universe grid created", grid);
             do
             {
                 while(!_input.ConsoleKeyAvailable())
                 {
-                    _output.Clear();
+                   // _output.Clear();
+                    //_output.WriteLine("Testing");
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
                     Thread.Sleep(200);

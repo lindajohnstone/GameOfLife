@@ -13,10 +13,7 @@ namespace GameOfLife
         {
             var count = _grid.HowManyLiveNeighbours(cellX, cellY);
             var cell = _grid.Grid[cellX, cellY];
-            if (cell.CellState == State.Alive)
-            {
-                if (count < Constants.CountUnderpopulation) return true;
-            }
+            if (cell.CellState == State.Alive && count < Constants.CountUnderpopulation) return true;
             return false;
         }
     }
