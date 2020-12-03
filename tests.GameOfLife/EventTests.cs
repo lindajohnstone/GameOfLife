@@ -12,19 +12,18 @@ namespace tests.GameOfLife
         public void Should_Test_GridPrintEvent()
         {
             // arrange
-            /* var output = new StubOutput();
+            var output = new StubOutput();
             var grid = new Universe();
             grid.SetUpGrid(3,3);
             grid.Initialise();
-            ILogger<UniverseGenerator> universeGeneratorLogger;
             var expected = "* ";
-            generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
+            PrintGrid += GridPrintEvent.HandlePrintGrid;
             // act
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             PrintGrid?.Invoke(this, new GridPrintEventArgs(output, grid.Grid)); 
             // assert
-            Assert.Equal(expected, output.GetWriteLine()); */
+            Assert.Equal(expected, output.GetWriteLine());
         }
     }
 }

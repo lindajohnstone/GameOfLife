@@ -18,7 +18,7 @@ namespace GameOfLife
             var output = new ConsoleOutput();
             var grid = new Universe();
             var input = new ConsoleInput();
-            var game = new GameController(grid);
+            var game = new GameController(grid, output);
             input.ConsoleCancelKeyPress();
             var generator = new UniverseGenerator(output, grid, input, game, _universeGeneratorLogger);
             generator.PrintGrid += GridPrintEvent.HandlePrintGrid;

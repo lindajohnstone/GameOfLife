@@ -41,8 +41,8 @@ namespace GameOfLife
             {
                 while(!_input.ConsoleKeyAvailable())
                 {
-                   // _output.Clear();
-                    //_output.WriteLine("Testing");
+                    //_output.Clear();
+                    _output.WriteLine("Testing");
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
                     Thread.Sleep(200);

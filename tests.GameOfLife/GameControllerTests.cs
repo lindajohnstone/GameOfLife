@@ -18,7 +18,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid);
+            var game = new GameController(grid, new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             var row = 1;
@@ -35,7 +35,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid);
+            var game = new GameController(grid, new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
@@ -68,7 +68,7 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid);
+            var game = new GameController(grid, new StubOutput());
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             // assert
@@ -81,6 +81,9 @@ namespace tests.GameOfLife
         [InlineData(0,2,State.Dead)]
         [InlineData(1,0,State.Dead)]
         [InlineData(1,2,State.Alive)] // fails
+        [InlineData(2,0,State.Alive)] // fails
+        [InlineData(2,1,State.Alive)] // fails
+        [InlineData(2,2,State.Alive)] // fails
         public void Should_Check_LoopThroughEachCell(int cellX, int cellY, State expected) // TODO: change method name
         {
             // arrange
@@ -94,7 +97,7 @@ namespace tests.GameOfLife
                 new SurvivalRule(grid),
                 new UnderpopulationRule(grid)
             };
-            var game = new GameController(grid);
+            var game = new GameController(grid, new StubOutput());
             // act
             game.LoopThroughEachCell();
             // assert
