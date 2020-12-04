@@ -98,8 +98,8 @@ namespace tests.GameOfLife
             Assert.Equal(expected, result);
         }
         [Theory]
-        [InlineData(1,1, true)]
-        [InlineData(2,2,false)]
+        [InlineData(1,1, false)]
+        [InlineData(2,1, true)]
         public void Should_Test_SurvivalRule(int cellX, int cellY, bool expected)
         {
             // arrange
@@ -115,6 +115,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(1,2);
             grid.SwitchCellState(1,3);
             grid.SwitchCellState(2,1);
+            grid.SwitchCellState(2,2);
             grid.SwitchCellState(2,3);
             // act
             var result = rule.CheckRules(cellX, cellY);
