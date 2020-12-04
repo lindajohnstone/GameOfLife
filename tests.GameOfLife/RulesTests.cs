@@ -79,7 +79,6 @@ namespace tests.GameOfLife
         [Fact]
         public void Should_Test_OvercrowdingRule_Returns_False() 
         {
-            // TODO: why passes for 4 live cells: because cell 1,1, is alive & has less than 4 live neighbours
             // arrange
             var grid = new Universe();
             var rule = new OvercrowdingRule(grid);
@@ -87,7 +86,6 @@ namespace tests.GameOfLife
             grid.Initialise();
             var col = 1;
             var row = 1;
-            grid.SwitchCellState(1,2);
             grid.SwitchCellState(2,0);
             grid.SwitchCellState(2,1);
             grid.SwitchCellState(2,2);
