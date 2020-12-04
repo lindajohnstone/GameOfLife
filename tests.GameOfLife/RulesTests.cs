@@ -4,10 +4,7 @@ using GameOfLife;
 namespace tests.GameOfLife
 {
     public class RulesTests
-    {
-        const int row = 1;
-        const int col = 1;
-        
+    {   
         [Fact]
         public void Should_Test_UnderpopulationRule_Returns_False()
         {
@@ -16,6 +13,8 @@ namespace tests.GameOfLife
             var rule = new UnderpopulationRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
+            var col = 1;
+            var row = 1;
             var expected = false;
             // act
             var result = rule.CheckRules(row, col);
@@ -46,13 +45,15 @@ namespace tests.GameOfLife
         }
         
         [Fact]
-        public void Should_Test_Overcrowding_Rule()
+        public void Should_Test_OvercrowdingRule_Returns_True()
         {
             // arrange
             var grid = new Universe();
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
+            var col = 1;
+            var row = 1;
             var expected = true;
             // act
             var result = rule.CheckRules(row, col);
@@ -67,10 +68,33 @@ namespace tests.GameOfLife
             var rule = new SurvivalRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
+            var col = 1;
+            var row = 1;
             var expected = false;
             // act
             var result = rule.CheckRules(row, col);
             // assert
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void Should_Test_OvercrowdingRule_Returns_False() 
+        {
+            // TODO: why passes for 4 live cells: because cell 1,1, is alive & has less than 4 live neighbours
+            // arrange
+            var grid = new Universe();
+            var rule = new OvercrowdingRule(grid);
+            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.Initialise();
+            var col = 1;
+            var row = 1;
+            grid.SwitchCellState(1,2);
+            grid.SwitchCellState(2,0);
+            grid.SwitchCellState(2,1);
+            grid.SwitchCellState(2,2);
+            var expected = false;
+            // act
+            var result = rule.CheckRules(row, col);
+            //assert
             Assert.Equal(expected, result);
         }
         [Theory]
