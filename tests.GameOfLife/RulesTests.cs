@@ -86,6 +86,8 @@ namespace tests.GameOfLife
             grid.Initialise();
             var col = 1;
             var row = 1;
+            grid.SwitchCellState(0,2); // passes for constant == 4 if line commented out
+            grid.SwitchCellState(1,2);
             grid.SwitchCellState(2,0);
             grid.SwitchCellState(2,1);
             grid.SwitchCellState(2,2);

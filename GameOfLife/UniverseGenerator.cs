@@ -36,18 +36,18 @@ namespace GameOfLife
             _grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             _grid.Initialise();
             var grid = _grid;
-            _universeGeneratorLogger.LogInformation("New universe grid created", grid);
+            //_universeGeneratorLogger.LogInformation("New universe grid created", grid);
             do
             {
                 while(!_input.ConsoleKeyAvailable())
                 {
-                    //_output.Clear();
-                    _output.WriteLine("Testing");
+                    _output.Clear();
+                    //_output.WriteLine("Testing");
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
                     Thread.Sleep(200);
                     var hashCode = grid.GetHashCode();
-                    _output.WriteLine($"This is the Grid's hashcode: {hashCode}");
+                    //_universeGeneratorLogger.LogInformation($"This is the Grid's hashcode: {hashCode}");
                 }
             }
             while (_input.ReadKey(true).Key != ConsoleKey.Q);  

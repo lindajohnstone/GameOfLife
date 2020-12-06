@@ -75,7 +75,7 @@ namespace tests.GameOfLife
             Assert.Throws<IndexOutOfRangeException>(() => grid.HowManyLiveNeighbours(row, col));
         }
         [Theory]
-        [InlineData(1,1,State.Alive)]
+        [InlineData(1,1,State.Dead)]
         [InlineData(0,0,State.Dead)]
         [InlineData(0,1,State.Dead)]
         [InlineData(0,2,State.Dead)]

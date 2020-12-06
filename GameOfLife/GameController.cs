@@ -9,11 +9,13 @@ namespace GameOfLife
         Universe _grid;
         IRules[] _rules;
         IOutput _output;
+        ILogger<GameController> _gameControllerLogger;
 
-        public GameController(Universe grid, IOutput output)
+        public GameController(Universe grid, IOutput output, ILogger<GameController> gameControllerLogger)
         {
             _grid = grid;
             _output = output;
+            _gameControllerLogger = gameControllerLogger;
             _rules = new IRules[] 
             {
                 new OvercrowdingRule(_grid),
@@ -43,7 +45,7 @@ namespace GameOfLife
             }
             _grid = nextGrid;
             var hashCode = _grid.GetHashCode();
-            _output.WriteLine($"This is the hash code from LoopThroughEachCell: {hashCode}");
+            //_gameControllerLogger.LogInformation($"This is the hash code from LoopThroughEachCell: {hashCode}");
             return _grid;
         }
     }

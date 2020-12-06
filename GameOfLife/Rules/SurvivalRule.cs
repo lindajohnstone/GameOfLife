@@ -15,7 +15,7 @@ namespace GameOfLife
         {
             var cell = _grid.Grid[row, col];
             var count = _grid.HowManyLiveNeighbours(row, col);
-            if (cell .CellState == State.Alive)
+            if (cell .CellState == State.Dead)
             {
                 if (count == Constants.CountSurvivalMin || count == Constants.CountSurvivalMax) return true; 
             }
