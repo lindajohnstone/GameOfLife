@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameOfLife;
 
@@ -27,6 +28,11 @@ namespace tests.GameOfLife
         public string GetWrite() 
         {
             return _queue.Dequeue();
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
         }
     }
 }
