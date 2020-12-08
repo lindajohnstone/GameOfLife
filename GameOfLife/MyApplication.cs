@@ -16,7 +16,7 @@ namespace GameOfLife
         }
         internal void Run()
         {
-            //_logger.LogInformation("Start to run");
+            // _logger.LogInformation("Start to run");
             var output = new ConsoleOutput();
             var grid = new Universe();
             var input = new ConsoleInput();
@@ -25,7 +25,7 @@ namespace GameOfLife
             var generator = new UniverseGenerator(output, grid, input, game, _universeGeneratorLogger);
             generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
             generator.RunGame();
-            //_logger.LogInformation("Finish running");
+            // _logger.LogInformation("Finish running");
         }
     }
 }

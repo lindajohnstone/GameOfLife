@@ -14,7 +14,7 @@ namespace tests.GameOfLife
             var gridWidth = 3;
             var expected = new Cell[gridLength,gridWidth];
             // act
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            grid.SetUpGrid(gridLength, gridWidth);
             // assert
             Assert.Equal(expected.Length, grid.Grid.Length);
         }

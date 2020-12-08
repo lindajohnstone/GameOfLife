@@ -7,8 +7,6 @@ namespace tests.GameOfLife
     {
         private string _readLine;
         private string _readKey;
-        private string _userInput = "Q";
-
         public ConsoleKeyInfo ReadKey()
         {
             return Console.ReadKey();

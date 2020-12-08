@@ -42,10 +42,9 @@ namespace GameOfLife
                 while(!_input.ConsoleKeyAvailable())
                 {
                     _output.Clear();
-                    //_output.WriteLine("Testing");
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
-                    Thread.Sleep(200);
+                    Thread.Sleep(400);
                     var hashCode = grid.GetHashCode();
                     //_universeGeneratorLogger.LogInformation($"This is the Grid's hashcode: {hashCode}");
                 }

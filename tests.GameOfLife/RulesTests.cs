@@ -105,8 +105,9 @@ namespace tests.GameOfLife
             // arrange
             var grid = new Universe();
             var rule = new SurvivalRule(grid);
+            var gridLength = 3;
             var gridWidth = 4;
-            grid.SetUpGrid(Constants.GridLength, gridWidth);
+            grid.SetUpGrid(gridLength, gridWidth);
             grid.Initialise();
             grid.SwitchCellState(0,0);
             grid.SwitchCellState(0,1);
