@@ -4,13 +4,12 @@ using Xunit;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace tests.GameOfLife
 {
     public class GameControllerTests
     {
-        const int row = 1;
-        const int col = 1;
         [Theory]
         [InlineData(1,1,State.Dead)]
         [InlineData(2,2,State.Alive)]
@@ -18,8 +17,11 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid, new StubOutput());
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            var logger = new Mock<ILogger<GameController>>();
+            var game = new GameController(grid, new StubOutput(), logger.Object);
+            var gridLength = 3;
+            var gridWidth = 3;
+            grid.SetUpGrid(gridLength, gridWidth);
             grid.Initialise();
             var row = 1;
             var col = 1;
@@ -35,8 +37,13 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid, new StubOutput());
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            var logger = new Mock<ILogger<GameController>>();
+            var game = new GameController(grid, new StubOutput(), logger.Object);
+            var gridLength = 3;
+            var gridWidth = 3;
+            var row = 1;
+            var col = 1;
+            grid.SetUpGrid(gridLength, gridWidth);
             grid.Initialise();
             grid.SwitchCellState(row,col);
             var cell = grid.Grid[cellX, cellY];
@@ -47,12 +54,13 @@ namespace tests.GameOfLife
         [InlineData(1, 1, 8)]
         [InlineData(2, 1, 8)]
         [InlineData(0, 1, 8)]
-        [InlineData(Constants.GridLength - 1, Constants.GridWidth - 1, 8)] 
         public void Should_Count_Cell_NeighbourStateAlive(int row, int col, int expected)
         {
             // arrange
             var grid = new Universe();
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            var gridLength = 3;
+            var gridWidth = 3;
+            grid.SetUpGrid(gridLength, gridWidth);
             grid.Initialise();
             // act
             var result = grid.HowManyLiveNeighbours(row, col);
@@ -68,7 +76,8 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            var game = new GameController(grid, new StubOutput());
+            var logger = new Mock<ILogger<GameController>>();
+            var game = new GameController(grid, new StubOutput(), logger.Object);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             // assert
@@ -88,7 +97,9 @@ namespace tests.GameOfLife
         {
             // arrange
             var grid = new Universe();
-            grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
+            var gridLength = 3;
+            var gridWidth = 3;
+            grid.SetUpGrid(gridLength, gridWidth);
             grid.Initialise();
             var rules = new IRules[] 
             {
@@ -97,7 +108,8 @@ namespace tests.GameOfLife
                 new SurvivalRule(grid),
                 new UnderpopulationRule(grid)
             };
-            var game = new GameController(grid, new StubOutput());
+            var logger = new Mock<ILogger<GameController>>();
+            var game = new GameController(grid, new StubOutput(), logger.Object);
             // act
             game.LoopThroughEachCell();
             // assert

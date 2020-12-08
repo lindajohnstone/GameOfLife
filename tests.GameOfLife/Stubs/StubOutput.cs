@@ -34,5 +34,13 @@ namespace tests.GameOfLife
         {
             Console.Clear();
         }
+
+        public void CreateBorderHorizontalEdge()
+        {
+            var line = '-';
+            var beginLine = " ";
+            var borderWidth = 75;
+            beginLine.PadRight(borderWidth, line);
+        }
     }
 }

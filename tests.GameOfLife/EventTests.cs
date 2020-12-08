@@ -16,7 +16,7 @@ namespace tests.GameOfLife
             var grid = new Universe();
             grid.SetUpGrid(3,3);
             grid.Initialise();
-            var expected = "* ";
+            var expected = "|";
             PrintGrid += GridPrintEvent.HandlePrintGrid;
             // act
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);

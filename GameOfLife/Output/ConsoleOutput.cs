@@ -4,6 +4,11 @@ namespace GameOfLife
 {
     public class ConsoleOutput : IOutput
     {
+    public ConsoleOutput()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+    }
+
         public void Clear()
         {
             Console.Clear();
@@ -18,6 +23,14 @@ namespace GameOfLife
         public void WriteLine(string v)
         {
             Console.WriteLine(v);
+        }
+
+        public void CreateBorderHorizontalEdge()
+        {
+            var line = '-';
+            var beginLine = " ";
+            var borderWidth = Constants.GridWidth * 3;
+            Console.WriteLine(beginLine.PadRight(borderWidth, line));
         }
     }
 }
