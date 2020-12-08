@@ -42,6 +42,8 @@ namespace GameOfLife
                 while(!_input.ConsoleKeyAvailable())
                 {
                     _output.Clear();
+                    _output.WriteLine("Welcome to Game of Life");
+                    _output.WriteLine("Press 'Q' to stop");
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
                     Thread.Sleep(400);

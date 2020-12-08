@@ -4,10 +4,6 @@ namespace GameOfLife
 {
     public class ConsoleOutput : IOutput
     {
-    public ConsoleOutput()
-    {
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
-    }
 
         public void Clear()
         {
