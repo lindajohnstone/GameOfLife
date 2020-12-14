@@ -9,7 +9,8 @@ namespace tests.GameOfLife
         public void Should_Test_SetUpGrid()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var gridLength = 3;
             var gridWidth = 3;
             var expected = new Cell[gridLength,gridWidth];
@@ -22,7 +23,8 @@ namespace tests.GameOfLife
         public void Should_Test_InitialiseGrid()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             var cell = new Cell();
             // act

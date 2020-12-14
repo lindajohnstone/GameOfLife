@@ -10,12 +10,17 @@ namespace GameOfLife
         IRules[] _rules;
         IOutput _output;
         ILogger<GameController> _gameControllerLogger;
+        IReader _fileInput;
 
-        public GameController(Universe grid, IOutput output, ILogger<GameController> gameControllerLogger)
+        public GameController(Universe grid, 
+            IOutput output, 
+            ILogger<GameController> gameControllerLogger, 
+            IReader fileInput)
         {
             _grid = grid;
             _output = output;
             _gameControllerLogger = gameControllerLogger;
+            _fileInput = fileInput;
             _rules = new IRules[] 
             {
                 new OvercrowdingRule(_grid),
@@ -32,7 +37,7 @@ namespace GameOfLife
 
         public Universe LoopThroughEachCell()
         {
-            Universe nextGrid = new Universe();
+            Universe nextGrid = new Universe(_fileInput);
             nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
 
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)

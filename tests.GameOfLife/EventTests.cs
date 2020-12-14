@@ -13,7 +13,8 @@ namespace tests.GameOfLife
         {
             // arrange
             var output = new StubOutput();
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             grid.SetUpGrid(3,3);
             grid.Initialise();
             var expected = "|";

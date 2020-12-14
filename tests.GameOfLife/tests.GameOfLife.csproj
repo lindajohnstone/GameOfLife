@@ -17,5 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GameOfLife\GameOfLife.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Update="TestFiles/*.*"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+  </ItemGroup>
 </Project>

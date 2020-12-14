@@ -9,7 +9,8 @@ namespace tests.GameOfLife
         public void Should_Test_UnderpopulationRule_Returns_False()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new UnderpopulationRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -27,7 +28,8 @@ namespace tests.GameOfLife
         public void Should_Test_UnderpopulationRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new UnderpopulationRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -48,7 +50,8 @@ namespace tests.GameOfLife
         public void Should_Test_OvercrowdingRule_Returns_True()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -64,7 +67,8 @@ namespace tests.GameOfLife
         public void Should_Test_SurvivalRule_Returns_False()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new SurvivalRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -80,7 +84,8 @@ namespace tests.GameOfLife
         public void Should_Test_OvercrowdingRule_Returns_False() 
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -103,7 +108,8 @@ namespace tests.GameOfLife
         public void Should_Test_SurvivalRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new SurvivalRule(grid);
             var gridLength = 3;
             var gridWidth = 4;
@@ -129,7 +135,8 @@ namespace tests.GameOfLife
         public void Should_Test_ReproductionRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new ReproductionRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
