@@ -37,14 +37,22 @@ namespace GameOfLife
             // add value to cell
             // if string = Alive Cell.State == State.Alive
             // else Cell.State == State.Dead
-            var setUp = ReceiveFileInput();
-            for (int row = 1; row < setUp.Length; row++)
+            var setUp = ReceiveFileInput(); 
+            for (int i = 0; i < setUp.Length - 1; i++)// TODO:need to discard bottom line or call setUp array from line 2 
+            {
+                setUp[i] = setUp[i + 1];
+            }
+            for (int row = 0; row < setUp.Length - 1; row++)
             {
                 var gridCell = setUp[row].Split(" ");
-                for (int col = 0; col < gridCell.Length; col++)
+                for (int col = 0; col < gridCell.Length-1; col++)
                 {
                     Cell cell = new Cell();
-                    cell.CellState = gridCell[col];
+                    if (Enum.TryParse(typeof(State), gridCell[col], out var result))
+                    {
+                        cell.CellState = (State)result;
+                    }
+                    Grid[row, col] = cell;
                 }
             }
         }
