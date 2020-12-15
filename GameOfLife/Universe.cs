@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace GameOfLife
 {
@@ -14,7 +15,7 @@ namespace GameOfLife
         {
             return _fileInput.ReadFile();
         }
-        public int[] GetGridDimensions()
+        public int[] GetGridDimensions()//TODO: don't read file twice - pass from ReceiveFileInput
         {
             var setUp = ReceiveFileInput();
             var fileInput = setUp[0].Split(" ");
@@ -28,24 +29,13 @@ namespace GameOfLife
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
         }
-        public void Populate()
+        public void Populate()//TODO: don't read file twice - pass from ReceiveFileInput
         {
-            // file has been opened
-            // grid has been set up
-            // from line 2 of file:
-            // split on " "
-            // add value to cell
-            // if string = Alive Cell.State == State.Alive
-            // else Cell.State == State.Dead
-            var setUp = ReceiveFileInput(); 
-            for (int i = 0; i < setUp.Length - 1; i++)// TODO:need to discard bottom line or call setUp array from line 2 
-            {
-                setUp[i] = setUp[i + 1];
-            }
-            for (int row = 0; row < setUp.Length - 1; row++)
+            var setUp = ReceiveFileInput().Skip(1).ToArray(); 
+            for (int row = 0; row < setUp.Length; row++)
             {
                 var gridCell = setUp[row].Split(" ");
-                for (int col = 0; col < gridCell.Length-1; col++)
+                for (int col = 0; col < gridCell.Length; col++)
                 {
                     Cell cell = new Cell();
                     if (Enum.TryParse(typeof(State), gridCell[col], out var result))

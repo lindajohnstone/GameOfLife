@@ -93,10 +93,10 @@ namespace tests.GameOfLife
         [InlineData(0,1,State.Dead)]
         [InlineData(0,2,State.Dead)]
         [InlineData(1,0,State.Dead)]
-        [InlineData(1,2,State.Alive)] // fails
-        [InlineData(2,0,State.Alive)] // fails
-        [InlineData(2,1,State.Alive)] // fails
-        [InlineData(2,2,State.Alive)] // fails
+        [InlineData(1,2,State.Alive)] 
+        [InlineData(2,0,State.Alive)] 
+        [InlineData(2,1,State.Alive)] 
+        [InlineData(2,2,State.Alive)] 
         public void Should_Check_LoopThroughEachCell(int cellX, int cellY, State expected) // TODO: change method name
         {
             // arrange

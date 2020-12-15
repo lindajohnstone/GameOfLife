@@ -7,5 +7,6 @@ namespace GameOfLife
         string ReadLine();
         ConsoleKeyInfo ReadKey(bool value);
         bool ConsoleKeyAvailable();
+        void ConsoleCancelKeyPress();
     }
 }

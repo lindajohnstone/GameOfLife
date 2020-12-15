@@ -27,7 +27,10 @@ namespace GameOfLife
                     .AddTransient<MyApplication>()
                     .AddTransient<UniverseGenerator>()
                     .AddTransient<GameController>()
-                    .AddTransient<IReader, FileReader>();
+                    .AddTransient<IReader, FileReader>()
+                    .AddTransient<IOutput, ConsoleOutput>()
+                    .AddTransient<IInput, ConsoleInput>()
+                    .AddTransient<Universe>();
         }
     }
 }

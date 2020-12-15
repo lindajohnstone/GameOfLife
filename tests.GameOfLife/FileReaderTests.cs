@@ -131,14 +131,14 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected.Length, grid.Grid.Length);
         }
-        [Fact]
-        public void Should_Populate_Universe_From_File_Input()
+        [Theory]
+        //[InlineData(0,0, State.Alive)]
+        [InlineData(3,2, State.Alive)]
+        public void Should_Populate_Universe_From_File_Input(int row, int col, State expected)
         {
             // arrange
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
-            var row = 0;
-            var col = 0;
             var setUp = fileInput.ReadFile();
             var dimensions = grid.GetGridDimensions();
             var gridLength = dimensions[0];
@@ -147,7 +147,7 @@ namespace tests.GameOfLife
             // act
             grid.Populate();
             // assert
-            Assert.Equal(State.Alive, grid.Grid[row, col].CellState);
+            Assert.Equal(expected, grid.Grid[row, col].CellState);
         }
     }
 }
