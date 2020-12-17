@@ -39,9 +39,9 @@ namespace GameOfLife
         }
         internal void Run()
         {
-            var game = new GameController(_grid, _output, _gameControllerLogger, _fileInput);// TODO: dependency injection
+            var game = new GameController(_grid, _output, _gameControllerLogger, _fileInput); // TODO: dependency injection. NB more than one instance of grid
             _input.ConsoleCancelKeyPress();
-            var generator = new UniverseGenerator(_output, _grid, _input, _game, _universeGeneratorLogger, _fileInput); // dependency injection
+            var generator = new UniverseGenerator(_output, _grid, _input, game, _universeGeneratorLogger, _fileInput); // TODO: dependency injection
             
             generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
             generator.RunGame();

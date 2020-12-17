@@ -35,12 +35,12 @@ namespace GameOfLife
             if (_rules.Any(_ => _.CheckRules(row, col))) _grid.SwitchCellState(row, col);
         }
 
-        public Universe LoopThroughEachCell()// TODO: rename GetNextUniverse
+        public Universe LoopThroughEachCell() // TODO: rename GetNextUniverse
         {
             Universe nextGrid = new Universe(_fileInput);
             nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-            if (_grid == null) _output.WriteLine("_grid is null");
-            if (_grid.Grid == null) _output.WriteLine("_grid.Grid is null");
+            if (_grid == null) _gameControllerLogger.LogInformation("_grid is null");
+            if (_grid.Grid == null) _gameControllerLogger.LogInformation("_grid.Grid is null"); // TODO: more than one instance of grid
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
                 for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)

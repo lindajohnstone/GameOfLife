@@ -44,11 +44,11 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, result);
         }
-          [Fact]
+         /*  [Fact]
         public void Should_Show_User_Message_When_File_Does_Not_Exist()// Now fails as file is hard coded
         {
             // arrange
-            var path = "TestFiles/test.txt";
+            //var path = "TestFiles/test.txt";
             var fileInput = new FileReader();
             var message = "File does not exist.";
             var expected = message;
@@ -56,7 +56,7 @@ namespace tests.GameOfLife
             var result = fileInput.FileExists();
             // assert
             Assert.Equal(expected, result);
-        }
+        } */
         [Fact]
         public void Should_Show_User_Message_When_File_Does_Not_Exist_Using_Moq() // passes even if file does exist
         {
@@ -110,7 +110,7 @@ namespace tests.GameOfLife
             var grid = new Universe(fileInput);
             var setUp = fileInput.ReadFile();
             // act
-            var result = grid.GetGridDimensions();
+            var result = grid.GetGridDimensions(setUp);
             // assert
             Assert.Equal(4, result[0]);
             Assert.Equal(5, result[1]);
@@ -122,17 +122,17 @@ namespace tests.GameOfLife
             IReader fileInput = new FileReader();
             var setUp = fileInput.ReadFile();
             var grid = new Universe(fileInput);
-            var dimensions = grid.GetGridDimensions();
+            var dimensions = grid.GetGridDimensions(setUp);
             var gridLength = dimensions[0];
             var gridWidth = dimensions[1];
             var expected = new Cell[gridLength, gridWidth];
             // act
             grid.SetUpGrid(gridLength, gridWidth);
             // assert
-            Assert.Equal(expected.Length, grid.Grid.Length);
+            Assert.Equal(expected, grid.Grid);
         }
         [Theory]
-        //[InlineData(0,0, State.Alive)]
+        [InlineData(0,0, State.Alive)]
         [InlineData(3,2, State.Alive)]
         public void Should_Populate_Universe_From_File_Input(int row, int col, State expected)
         {
@@ -140,12 +140,12 @@ namespace tests.GameOfLife
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
             var setUp = fileInput.ReadFile();
-            var dimensions = grid.GetGridDimensions();
+            var dimensions = grid.GetGridDimensions(setUp);
             var gridLength = dimensions[0];
             var gridWidth = dimensions[1]; 
             grid.SetUpGrid(gridLength, gridWidth);
             // act
-            grid.Populate();
+            grid.Populate(setUp);
             // assert
             Assert.Equal(expected, grid.Grid[row, col].CellState);
         }

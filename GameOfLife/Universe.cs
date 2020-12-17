@@ -15,9 +15,8 @@ namespace GameOfLife
         {
             return _fileInput.ReadFile();
         }
-        public int[] GetGridDimensions()//TODO: don't read file twice - pass from ReceiveFileInput
+        public int[] GetGridDimensions(string[] setUp)
         {
-            var setUp = ReceiveFileInput();
             var fileInput = setUp[0].Split(" ");
             var gridSetUp = new int[2];
             int.TryParse(fileInput[0], out var gridLength);
@@ -29,12 +28,12 @@ namespace GameOfLife
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
         }
-        public void Populate()//TODO: don't read file twice - pass from ReceiveFileInput
+        public void Populate(string[] setUp)
         {
-            var setUp = ReceiveFileInput().Skip(1).ToArray(); 
-            for (int row = 0; row < setUp.Length; row++)
+            var gridSetUp = setUp.Skip(1).ToArray(); 
+            for (int row = 0; row < gridSetUp.Length; row++)
             {
-                var gridCell = setUp[row].Split(" ");
+                var gridCell = gridSetUp[row].Split(" ");
                 for (int col = 0; col < gridCell.Length; col++)
                 {
                     Cell cell = new Cell();
