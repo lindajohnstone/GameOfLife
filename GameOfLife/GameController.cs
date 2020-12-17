@@ -8,17 +8,14 @@ namespace GameOfLife
     {
         Universe _grid;
         IRules[] _rules;
-        IOutput _output;
         ILogger<GameController> _gameControllerLogger;
         IReader _fileInput;
 
         public GameController(Universe grid, 
-            IOutput output, 
             ILogger<GameController> gameControllerLogger, 
             IReader fileInput)
         {
             _grid = grid;
-            _output = output;
             _gameControllerLogger = gameControllerLogger;
             _fileInput = fileInput;
             _rules = new IRules[] 
@@ -32,7 +29,7 @@ namespace GameOfLife
         
         public void CheckRules(int row, int col)
         {
-            if (_rules.Any(_ => _.CheckRules(row, col))) _grid.SwitchCellState(row, col);
+            if (_rules.Any(_ => _.Check(row, col))) _grid.SwitchCellState(row, col);
         }
 
         public Universe LoopThroughEachCell() // TODO: rename GetNextUniverse

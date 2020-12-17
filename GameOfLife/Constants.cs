@@ -9,5 +9,7 @@ namespace GameOfLife
         public const int CountSurvivalMax = 3;
         public const int CountReproduction = 3;
         public const int CountUnderpopulation = 2;
+        public const int RowMin = 3;
+        public const int ColumnMin = 3;
     }
 }

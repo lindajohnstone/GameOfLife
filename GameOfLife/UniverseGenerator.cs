@@ -9,7 +9,6 @@ namespace GameOfLife
     {
         IOutput _output;
         IInput _input;
-        IReader _fileInput;
         Universe _grid;
         IRules[] _rules;
         GameController _game;
@@ -20,13 +19,11 @@ namespace GameOfLife
             Universe grid, 
             IInput input, 
             GameController game, 
-            ILogger<UniverseGenerator> universeGeneratorLogger,
-            IReader fileInput)
+            ILogger<UniverseGenerator> universeGeneratorLogger)
         {
             _output = output;
             _grid = grid;
             _input = input;
-            _fileInput = fileInput;
             _rules = new IRules[] 
             {
                 new OvercrowdingRule(_grid),

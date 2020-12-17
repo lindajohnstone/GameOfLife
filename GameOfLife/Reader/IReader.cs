@@ -4,7 +4,7 @@ namespace GameOfLife
 {
     public interface IReader
     {
-        string[] ReadFile();
-        string FileExists();
+        string[] ReadFile(string filePath);
+        string FileExists(string filePath);
     }
 }

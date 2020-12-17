@@ -18,7 +18,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -41,7 +41,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,0);
             grid.SwitchCellState(2,1);
             // act
-            var result = rule.CheckRules(cellX,cellY);
+            var result = rule.Check(cellX,cellY);
             // assert
             Assert.Equal(expected, result);
         }
@@ -59,7 +59,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = true;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -76,7 +76,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -98,7 +98,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,2);
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             //assert
             Assert.Equal(expected, result);
         }
@@ -125,7 +125,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,2);
             grid.SwitchCellState(2,3);
             // act
-            var result = rule.CheckRules(cellX, cellY);
+            var result = rule.Check(cellX, cellY);
             // assert
             Assert.Equal(expected, result);
         }
@@ -147,7 +147,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(1,1);
             grid.SwitchCellState(1,2);
             // act
-            var result = rule.CheckRules(cellX,cellY);
+            var result = rule.Check(cellX,cellY);
             // assert
             Assert.Equal(expected, result);
         }

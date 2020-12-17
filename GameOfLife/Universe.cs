@@ -11,9 +11,9 @@ namespace GameOfLife
         {
             _fileInput = fileInput;
         } 
-        private string[] ReceiveFileInput()
+        private string[] ReceiveFileInput(string filePath)
         {
-            return _fileInput.ReadFile();
+            return _fileInput.ReadFile(filePath);
         }
         public int[] GetGridDimensions(string[] setUp)
         {
@@ -33,7 +33,7 @@ namespace GameOfLife
             var gridSetUp = setUp.Skip(1).ToArray(); 
             for (int row = 0; row < gridSetUp.Length; row++)
             {
-                var gridCell = gridSetUp[row].Split(" ");
+                var gridCell = gridSetUp[row].Split(" ");// 
                 for (int col = 0; col < gridCell.Length; col++)
                 {
                     Cell cell = new Cell();

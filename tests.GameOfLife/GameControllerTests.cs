@@ -19,7 +19,7 @@ namespace tests.GameOfLife
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
             var logger = new Mock<ILogger<GameController>>();
-            var game = new GameController(grid, new StubOutput(), logger.Object, fileInput);
+            var game = new GameController(grid, logger.Object, fileInput);
             var gridLength = 3;
             var gridWidth = 3;
             grid.SetUpGrid(gridLength, gridWidth);
@@ -40,7 +40,7 @@ namespace tests.GameOfLife
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
             var logger = new Mock<ILogger<GameController>>();
-            var game = new GameController(grid, new StubOutput(), logger.Object, fileInput);
+            var game = new GameController(grid, logger.Object, fileInput);
             var gridLength = 3;
             var gridWidth = 3;
             var row = 1;
@@ -81,7 +81,7 @@ namespace tests.GameOfLife
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
             var logger = new Mock<ILogger<GameController>>();
-            var game = new GameController(grid, new StubOutput(), logger.Object, fileInput);
+            var game = new GameController(grid, logger.Object, fileInput);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
             // assert
@@ -114,7 +114,7 @@ namespace tests.GameOfLife
                 new UnderpopulationRule(grid)
             };
             var logger = new Mock<ILogger<GameController>>();
-            var game = new GameController(grid, new StubOutput(), logger.Object, fileInput);
+            var game = new GameController(grid, logger.Object, fileInput);
             // act
             game.LoopThroughEachCell();
             // assert

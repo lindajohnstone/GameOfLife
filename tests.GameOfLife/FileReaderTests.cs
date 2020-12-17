@@ -24,10 +24,10 @@ namespace tests.GameOfLife
             var fileName = "../GameOfLife/testFile.txt";
             var mockReader = new Mock<IReader>();
             mockReader
-                .Setup(_ => _.FileExists())
+                .Setup(_ => _.FileExists(fileName))
                 .Returns(fileName); 
             // act
-            var result = mockReader.Object.FileExists();
+            var result = mockReader.Object.FileExists(fileName);
             // assert
             Assert.Equal(fileName, result);
         }
@@ -40,34 +40,34 @@ namespace tests.GameOfLife
             var fileInput = new FileReader();
             var expected = path;
             // act
-            var result = fileInput.FileExists();
+            var result = fileInput.FileExists(path);
             // assert
             Assert.Equal(expected, result);
         }
-         /*  [Fact]
+        [Fact]
         public void Should_Show_User_Message_When_File_Does_Not_Exist()// Now fails as file is hard coded
         {
             // arrange
-            //var path = "TestFiles/test.txt";
+            var path = "TestFiles/test.txt";
             var fileInput = new FileReader();
             var message = "File does not exist.";
             var expected = message;
             // act
-            var result = fileInput.FileExists();
+            var result = fileInput.FileExists(path);
             // assert
             Assert.Equal(expected, result);
-        } */
+        }
         [Fact]
-        public void Should_Show_User_Message_When_File_Does_Not_Exist_Using_Moq() // passes even if file does exist
+        public void Should_Show_User_Message_When_File_Does_Not_Exist_Using_Moq() 
         {
-            //var fileName = "../GameOfLife/file.txt";
+            var fileName = "../GameOfLife/file.txt";
             var message = "File does not exist.";
             var mockReader = new Mock<IReader>();
             mockReader
-                .Setup(_ => _.FileExists())
+                .Setup(_ => _.FileExists(fileName))
                 .Returns(message);
             // act
-            var result = mockReader.Object.FileExists();
+            var result = mockReader.Object.FileExists(fileName);
             // assert
             Assert.Equal(message, result);
         }
@@ -86,9 +86,10 @@ namespace tests.GameOfLife
         public void Should_Test_ReadFile_Reads_OneLine()
         {
             // arrange
+            var filePath = "TestFiles/testFile.txt";
             IReader fileInput = new FileReader();
             // act
-            var result = fileInput.ReadFile();
+            var result = fileInput.ReadFile(filePath);
             // assert
             Assert.Equal("4 5", result[0]);
         }
@@ -96,9 +97,10 @@ namespace tests.GameOfLife
         public void Should_Read_File_To_Array()
         {
             // arrange
+            var filePath = "TestFiles/testFile.txt";
             IReader fileInput = new FileReader();
             // act
-            var result = fileInput.ReadFile();
+            var result = fileInput.ReadFile(filePath);
             // assert
             Assert.Equal(5, result.Length);
         }
@@ -106,9 +108,10 @@ namespace tests.GameOfLife
         public void Should_Receive_InputValues_From_File_Line_One()
         {
             // arrange
+            var filePath = "TestFiles/testFile.txt";
             IReader fileInput = new FileReader();
             var grid = new Universe(fileInput);
-            var setUp = fileInput.ReadFile();
+            var setUp = fileInput.ReadFile(filePath);
             // act
             var result = grid.GetGridDimensions(setUp);
             // assert
@@ -119,8 +122,9 @@ namespace tests.GameOfLife
         public void Should_SetUp_Universe_With_File_Input()
         {
             // arrange
+            var filePath = "TestFiles/testFile.txt";
             IReader fileInput = new FileReader();
-            var setUp = fileInput.ReadFile();
+            var setUp = fileInput.ReadFile(filePath);
             var grid = new Universe(fileInput);
             var dimensions = grid.GetGridDimensions(setUp);
             var gridLength = dimensions[0];
@@ -137,9 +141,10 @@ namespace tests.GameOfLife
         public void Should_Populate_Universe_From_File_Input(int row, int col, State expected)
         {
             // arrange
+            var filePath = "TestFiles/testFile.txt";
             var fileInput = new FileReader();
             var grid = new Universe(fileInput);
-            var setUp = fileInput.ReadFile();
+            var setUp = fileInput.ReadFile(filePath);
             var dimensions = grid.GetGridDimensions(setUp);
             var gridLength = dimensions[0];
             var gridWidth = dimensions[1]; 

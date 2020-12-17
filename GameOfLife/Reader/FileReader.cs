@@ -5,18 +5,17 @@ namespace GameOfLife
 {
     public class FileReader : IReader
     {
-        private string _filePath = "InputFiles/testFile.txt";
-        public string FileExists()
+        public string FileExists(string filePath)
         {
-            if(File.Exists(_filePath)) return _filePath;
+            if(File.Exists(filePath)) return filePath;
             return "File does not exist.";
         }
 
-        public string[] ReadFile()
+        public string[] ReadFile(string filePath)
         { 
-            using(StreamReader file = new StreamReader(_filePath)) 
+            using(StreamReader file = new StreamReader(filePath)) 
             {    
-                string[] lines = File.ReadAllLines(_filePath);
+                string[] lines = File.ReadAllLines(filePath);
                 file.Close();   
                 return lines;
             }  
