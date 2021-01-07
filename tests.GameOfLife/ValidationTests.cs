@@ -63,5 +63,20 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal(expected, result);
         }
+        [Fact]
+        public void Should_Test_GridSetUp_FileInput_Is_Zero_Or_One()
+        {
+            // arrange
+            var filePath = "TestFiles/testFile.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            var expected = false;
+            // act
+            var result = validator.GetZeroOrOneToSetUpUniverse(setUp);
+            // assert
+            Assert.Equal(expected, result);
+        }
+        // TODO: fact tests using files with invalid data to check errors thrown
     }
 }

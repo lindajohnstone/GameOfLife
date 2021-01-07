@@ -37,7 +37,7 @@ namespace GameOfLife
             Universe nextGrid = new Universe(_fileInput);
             nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             if (_grid == null) _gameControllerLogger.LogInformation("_grid is null");
-            if (_grid.Grid == null) _gameControllerLogger.LogInformation("_grid.Grid is null"); // TODO: more than one instance of grid
+            if (_grid.Grid == null) _gameControllerLogger.LogInformation("_grid.Grid is null"); 
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
                 for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)

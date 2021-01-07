@@ -30,7 +30,7 @@ namespace GameOfLife
                     .AddTransient<IReader, FileReader>()
                     .AddTransient<IOutput, ConsoleOutput>()
                     .AddTransient<IInput, ConsoleInput>()
-                    .AddTransient<Universe>();
+                    .AddSingleton<Universe>();
         }
     }
 }

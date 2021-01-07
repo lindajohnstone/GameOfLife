@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace GameOfLife
 {
-    public class FileInputValidation
+    public class FileInputValidation // TODO: all methods updated (after tests written) to return error or string
     {
         public bool Dimensions(string[] line)
         {
@@ -13,7 +13,7 @@ namespace GameOfLife
         }
         public bool GridSetUp(string[] setUp)
         {
-            var regex = new Regex(@"[A-Za-z] ");
+            var regex = new Regex(@"\d ");
             var lines = setUp.Skip(1).ToArray();
             var count = 0;
             for (int i = 0; i < lines.Length; i++)
@@ -37,6 +37,20 @@ namespace GameOfLife
             var gridSetup = setUp[0].Split(" ");
             var gridLength = Int32.TryParse(gridSetup[0], out var numberRows) ;
             if (numberRows == setUp.Length - 1 && numberRows > Constants.RowMin) return true;
+            return false;
+        }
+
+        public bool GetZeroOrOneToSetUpUniverse(string[] setUp)
+        {
+            var regex = new Regex(@"\d{3,} {3,}");
+            var gridSetUp = setUp.Skip(1).ToArray();
+            // loop through each row checking regex
+            // find no error return true
+            // return false
+            foreach(var row in gridSetUp)
+            {
+                if(regex.IsMatch(row)) return true;
+            }
             return false;
         }
     }

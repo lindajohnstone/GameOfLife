@@ -25,7 +25,7 @@ namespace GameOfLife
             IInput input,
             GameController game,
             UniverseGenerator generator
-            )// TODO: use dependency injection instead of using NEW
+            )
         {
             _logger = logger;
             _universeGeneratorLogger = universeGeneratorLogger;
@@ -39,12 +39,10 @@ namespace GameOfLife
         }
         internal void Run()
         {
-            var game = new GameController(_grid, _gameControllerLogger, _fileInput); // TODO: dependency injection. NB more than one instance of grid
             _input.ConsoleCancelKeyPress();
-            var generator = new UniverseGenerator(_output, _grid, _input, game, _universeGeneratorLogger); // TODO: dependency injection
             
-            generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
-            generator.RunGame();
+            _generator.PrintGrid += GridPrintEvent.HandlePrintGrid;
+            _generator.RunGame();
             _logger.LogInformation("Game of Life has been stopped"); //TODO: change message "Goodbye"(??)
         }
     }

@@ -1,5 +1,5 @@
 4 5
-Alive Dead Alive Dead Alive
-Dead Dead Dead Dead Alive
-Alive Dead Dead Dead Alive
-Dead Dead Alive Dead Alive
+0 1 0 1 0
+1 1 1 1 0
+0 1 1 1 0
+1 1 0 1 0
