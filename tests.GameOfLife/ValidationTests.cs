@@ -11,7 +11,7 @@ namespace tests.GameOfLife
         public void Should_Throw_When_GridSetUp_FileInput_Is_Not_Zero_One_Or_Space() // TODO: passes for all numbers, not just 0 & 1, depending upon location in row
         {
             // arrange
-            var filePath = "TestFiles/InvalidGridSetUpInput.txt";
+            var filePath = "TestFiles/InvalidGridSetUp.txt";
             IReader fileInput = new FileReader();
             var setUp = fileInput.ReadFile(filePath);
             var validator = new FileInputValidation();
