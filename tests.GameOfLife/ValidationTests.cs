@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using GameOfLife;
 using Xunit;
@@ -7,76 +8,56 @@ namespace tests.GameOfLife
     public class ValidationTests
     {
         [Fact]
-        public void Should_Test_File_Input_Line_One_Is_Valid_Format()
+        public void Should_Throw_When_GridSetUp_FileInput_Is_Not_Zero_One_Or_Space() // TODO: passes for all numbers, not just 0 & 1, depending upon location in row
         {
             // arrange
-            var filePath = "TestFiles/testFile.txt";
+            var filePath = "TestFiles/InvalidGridSetUpInput.txt";
             IReader fileInput = new FileReader();
             var setUp = fileInput.ReadFile(filePath);
             var validator = new FileInputValidation();
-            var expected = true;
             // act
-            var result = validator.Dimensions(setUp);
+            var result = Assert.Throws<ArgumentException>(() => validator.GridSetUp(setUp));
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal("Error: File input for GridSetUp should contain 0, 1 or space only.", result.Message);
         }
         [Fact]
-        public void Should_Test_File_Input_Line_Two_Plus_Is_Valid_Format() // TODO: method name??
+        public void Should_Throw_When_Dimensions_Incorrect_Format()
         {
             // arrange
-            var filePath = "TestFiles/testFile.txt";
+            var filePath = "TestFiles/InvalidDimensions.txt";
             IReader fileInput = new FileReader();
             var setUp = fileInput.ReadFile(filePath);
-            setUp.Skip(1).ToArray();
             var validator = new FileInputValidation();
-            var expected = true;
             // act
-            var result = validator.GridSetUp(setUp);
+            var result = Assert.Throws<ArgumentException>(() => validator.Dimensions(setUp));
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal("Error: Dimensions (line 1 of file) should be 2 numbers, each not less than 3, with a space between.", result.Message);
         }
         [Fact]
-        public void Should_Test_File_GridLength_Equals_Grid_Set_Number_of_Rows()
+        public void Should_Throw_When_Number_Of_Rows_Does_Not_Match_RowCount()
         {
             // arrange
+            var filePath = "TestFiles/InvalidRowCount.txt";
             IReader fileInput = new FileReader();
-            var filePath = "TestFiles/testFile.txt";
             var setUp = fileInput.ReadFile(filePath);
             var validator = new FileInputValidation();
-            var expected = true;
             // act
-            var result = validator.RowCount(setUp);
+            var result = Assert.Throws<ArgumentException>(() => validator.RowCount(setUp));
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal("Error: Number of rows does not match RowCount.", result.Message);
         }
         [Fact]
-        public void Should_Test_File_GridWidth_Equals_Grid_Set_Number_of_Columns()
+        public void Should_Throw_When_Number_Of_Columns_Does_Not_Match_ColumnCount()
         {
             // arrange
-            var filePath = "TestFiles/testFile.txt";
+            var filePath = "TestFiles/InvalidColumnCount.txt";
             IReader fileInput = new FileReader();
             var setUp = fileInput.ReadFile(filePath);
             var validator = new FileInputValidation();
-            var expected = true;
             // act
-            var result = validator.ColumnCount(setUp);
+            var result = Assert.Throws<ArgumentException>(() => validator.ColumnCount(setUp));
             // assert
-            Assert.Equal(expected, result);
+            Assert.Equal("Error: Number of columns does not match ColumnCount.", result.Message);
         }
-        [Fact]
-        public void Should_Test_GridSetUp_FileInput_Is_Zero_Or_One()
-        {
-            // arrange
-            var filePath = "TestFiles/testFile.txt";
-            IReader fileInput = new FileReader();
-            var setUp = fileInput.ReadFile(filePath);
-            var validator = new FileInputValidation();
-            var expected = false;
-            // act
-            var result = validator.GetZeroOrOneToSetUpUniverse(setUp);
-            // assert
-            Assert.Equal(expected, result);
-        }
-        // TODO: fact tests using files with invalid data to check errors thrown
     }
 }
