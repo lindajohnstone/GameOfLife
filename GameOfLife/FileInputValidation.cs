@@ -4,24 +4,21 @@ using System.Text.RegularExpressions;
 
 namespace GameOfLife
 {
-    public class FileInputValidation // TODO: all methods updated (after tests written) to return error
+    public class FileInputValidation 
     {
         public void Dimensions(string[] line)
         {
             var regex = new Regex(@"\d{1,2} \d{1,2}");
             if(!regex.IsMatch(line[0])) throw new ArgumentException("Error: Dimensions (line 1 of file) should be 2 numbers, each not less than 3, with a space between.");
         }
-        public void GridSetUp(string[] setUp) // TODO: change regex to only allow 0, 1 and space; change method name?
+        public void GridSetUp(string[] setUp) // TODO: change method name?
         {
-            //var regex = new Regex(@"\d ");
-            var regex = new Regex(@"([0-1]+\s+){3,4}[0-1]*");
+            
             var gridSetUp = setUp.Skip(1).ToArray();
-            var count = 0;
             for (int i = 0; i < gridSetUp.Length; i++)
             {
-                if (!regex.IsMatch(gridSetUp[i])) count++;
+                if (!Enum.IsDefined(typeof(State), gridSetUp[i])) throw new ArgumentException("Error: File input for GridSetUp should contain 0, 1 or space only.");
             }
-            if (count > 0) throw new ArgumentException("Error: File input for GridSetUp should contain 0, 1 or space only.");
         }
         public void ColumnCount(string[] setUp)
         {

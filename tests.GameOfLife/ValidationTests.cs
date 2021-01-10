@@ -8,7 +8,7 @@ namespace tests.GameOfLife
     public class ValidationTests
     {
         [Fact]
-        public void Should_Throw_When_GridSetUp_FileInput_Is_Not_Zero_One_Or_Space() // TODO: passes for all numbers, not just 0 & 1, depending upon location in row
+        public void Should_Throw_When_GridSetUp_FileInput_Is_Not_Zero_One_Or_Space()
         {
             // arrange
             var filePath = "TestFiles/InvalidGridSetUp.txt";
@@ -59,5 +59,7 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal("Error: Number of columns does not match ColumnCount.", result.Message);
         }
+        // TODO: tests to validate rows and columns not less than 3
+
     }
 }
