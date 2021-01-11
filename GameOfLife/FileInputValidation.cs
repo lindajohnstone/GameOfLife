@@ -13,11 +13,13 @@ namespace GameOfLife
         }
         public void GridSetUp(string[] setUp) // TODO: change method name?
         {
-            
             var gridSetUp = setUp.Skip(1).ToArray();
             for (int i = 0; i < gridSetUp.Length; i++)
             {
-                if (!Enum.IsDefined(typeof(State), gridSetUp[i])) throw new ArgumentException("Error: File input for GridSetUp should contain 0, 1 or space only.");
+                foreach (var cell in gridSetUp[i].Split(" "))
+                {
+                    if (!Enum.IsDefined(typeof(State), Int32.Parse(cell))) throw new ArgumentException("Error: File input for GridSetUp should contain 0, 1 or space only.");
+                }
             }
         }
         public void ColumnCount(string[] setUp)
@@ -35,7 +37,7 @@ namespace GameOfLife
             var gridLength = Int32.TryParse(gridSetup[0], out var numberRows) ;
             if (numberRows != setUp.Length - 1)  
             if (numberRows != setUp.Length - 1) throw new ArgumentException("Error: Number of rows does not match RowCount.");
-            if (numberRows < Constants.RowMin) throw new ArgumentException("Error: RowCount should be greater than 3");
+            if (numberRows < Constants.RowMin) throw new ArgumentException("Error: RowCount should be greater than 3.");
         }
     }
 }

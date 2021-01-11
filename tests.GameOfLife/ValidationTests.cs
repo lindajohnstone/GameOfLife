@@ -21,6 +21,30 @@ namespace tests.GameOfLife
             Assert.Equal("Error: File input for GridSetUp should contain 0, 1 or space only.", result.Message);
         }
         [Fact]
+        public void Should_Not_Throw_When_GridSetUp_FileInput_Is_Zero_Or_One()
+        {
+            // arrange
+            var filePath = "TestFiles/testFile.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act & assert
+            try 
+            {
+                validator.GridSetUp(setUp);
+            }
+            catch
+            {
+                Assert.True(false, "Validation does work.");
+            }
+        }
+        [Fact]
+        public void Should()
+        {
+            if (!Enum.IsDefined(typeof(State), 0)) throw new ArgumentException("Error: File input for GridSetUp should contain 0, 1 or space only.");
+            
+        }
+        [Fact]
         public void Should_Throw_When_Dimensions_Incorrect_Format()
         {
             // arrange
@@ -32,6 +56,24 @@ namespace tests.GameOfLife
             var result = Assert.Throws<ArgumentException>(() => validator.Dimensions(setUp));
             // assert
             Assert.Equal("Error: Dimensions (line 1 of file) should be 2 numbers, each not less than 3, with a space between.", result.Message);
+        }
+        [Fact]
+        public void Should_Not_Throw_When_Dimensions_Correct_Format()
+        {
+            // arrange
+            var filePath = "TestFiles/testFile.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act & assert
+            try
+            {
+                validator.Dimensions(setUp);
+            }
+            catch
+            {
+                Assert.True(false, "Validation does work.");
+            }
         }
         [Fact]
         public void Should_Throw_When_Number_Of_Rows_Does_Not_Match_RowCount()
@@ -47,6 +89,37 @@ namespace tests.GameOfLife
             Assert.Equal("Error: Number of rows does not match RowCount.", result.Message);
         }
         [Fact]
+        public void Should_Not_Throw_When_Number_Of_Rows_Matches_RowCount()
+        {
+            // arrange
+            var filePath = "TestFiles/testFile.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act & assert
+            try
+            {
+                validator.RowCount(setUp);
+            }
+            catch
+            {
+                Assert.True(false, "Validation does work.");
+            }
+        }
+        [Fact]
+        public void Should_Throw_When_Number_Of_Rows_Less_Than_Three()
+        {
+            // arrange
+            var filePath = "TestFiles/RowColumnCountLessThanThree.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act
+            var result = Assert.Throws<ArgumentException>(() => validator.RowCount(setUp));
+            // assert
+            Assert.Equal("Error: RowCount should be greater than 3.", result.Message);
+        }
+        [Fact]
         public void Should_Throw_When_Number_Of_Columns_Does_Not_Match_ColumnCount()
         {
             // arrange
@@ -59,7 +132,36 @@ namespace tests.GameOfLife
             // assert
             Assert.Equal("Error: Number of columns does not match ColumnCount.", result.Message);
         }
-        // TODO: tests to validate rows and columns not less than 3
-
+        [Fact]
+        public void Should_Not_Throw_When_Number_Of_Columns_Matches_ColumnCount()
+        {
+            // arrange
+            var filePath = "TestFiles/testFile.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act & assert
+            try
+            {
+                validator.ColumnCount(setUp);
+            }
+            catch
+            {
+                Assert.True(false, "Validation does work.");
+            }
+        }
+        [Fact]
+        public void Should_Throw_When_Number_Of_Columns_Less_Than_Three()
+        {
+            // arrange
+            var filePath = "TestFiles/RowColumnCountLessThanThree.txt";
+            IReader fileInput = new FileReader();
+            var setUp = fileInput.ReadFile(filePath);
+            var validator = new FileInputValidation();
+            // act
+            var result = Assert.Throws<ArgumentException>(() => validator.ColumnCount(setUp));
+            // assert
+            Assert.Equal("Error: ColumnCount should be greater than 3.", result.Message);
+        }
     }
 }
