@@ -38,7 +38,6 @@ namespace GameOfLife
                 }
             }
         }
-        
         private string[] SplitArray(string[] value)
         {
             return value[0].Split(" ");
