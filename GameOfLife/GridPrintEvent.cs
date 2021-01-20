@@ -9,6 +9,7 @@ namespace GameOfLife
         const string deadCell = "💀";
         public static void HandlePrintGrid(object sender, GridPrintEventArgs args)
         { 
+            args.Output.CreateBorderHorizontalEdge();
             for (int row = 0; row < args.Grid.GetLength(0); row++)
             {
                 for (int col = 0; col < args.Grid.GetLength(1); col++)

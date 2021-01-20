@@ -37,5 +37,14 @@ namespace tests.GameOfLife
             _readKey = _userInput;
             return this;
         }
+
+        public void ConsoleCancelKeyPress()
+        {
+            Console.CancelKeyPress += HandleCancelKeyPress;
+        }
+        private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs args)
+        {
+            args.Cancel = true;
+        }
     }
 }

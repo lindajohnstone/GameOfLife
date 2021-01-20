@@ -26,7 +26,11 @@ namespace GameOfLife
             services.AddLogging(configure => configure.AddConsole())
                     .AddTransient<MyApplication>()
                     .AddTransient<UniverseGenerator>()
-                    .AddTransient<GameController>();
+                    .AddTransient<GameController>()
+                    .AddTransient<IReader, FileReader>()
+                    .AddTransient<IOutput, ConsoleOutput>()
+                    .AddTransient<IInput, ConsoleInput>()
+                    .AddSingleton<Universe>();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace tests.GameOfLife
         public void Should_Test_UnderpopulationRule_Returns_False()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new UnderpopulationRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -17,7 +18,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -27,7 +28,8 @@ namespace tests.GameOfLife
         public void Should_Test_UnderpopulationRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new UnderpopulationRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -39,7 +41,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,0);
             grid.SwitchCellState(2,1);
             // act
-            var result = rule.CheckRules(cellX,cellY);
+            var result = rule.Check(cellX,cellY);
             // assert
             Assert.Equal(expected, result);
         }
@@ -48,7 +50,8 @@ namespace tests.GameOfLife
         public void Should_Test_OvercrowdingRule_Returns_True()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -56,7 +59,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = true;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -64,7 +67,8 @@ namespace tests.GameOfLife
         public void Should_Test_SurvivalRule_Returns_False()
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new SurvivalRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -72,7 +76,7 @@ namespace tests.GameOfLife
             var row = 1;
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             // assert
             Assert.Equal(expected, result);
         }
@@ -80,7 +84,8 @@ namespace tests.GameOfLife
         public void Should_Test_OvercrowdingRule_Returns_False() 
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new OvercrowdingRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -93,7 +98,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,2);
             var expected = false;
             // act
-            var result = rule.CheckRules(row, col);
+            var result = rule.Check(row, col);
             //assert
             Assert.Equal(expected, result);
         }
@@ -103,7 +108,8 @@ namespace tests.GameOfLife
         public void Should_Test_SurvivalRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new SurvivalRule(grid);
             var gridLength = 3;
             var gridWidth = 4;
@@ -119,7 +125,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(2,2);
             grid.SwitchCellState(2,3);
             // act
-            var result = rule.CheckRules(cellX, cellY);
+            var result = rule.Check(cellX, cellY);
             // assert
             Assert.Equal(expected, result);
         }
@@ -129,7 +135,8 @@ namespace tests.GameOfLife
         public void Should_Test_ReproductionRule(int cellX, int cellY, bool expected)
         {
             // arrange
-            var grid = new Universe();
+            var fileInput = new FileReader();
+            var grid = new Universe(fileInput);
             var rule = new ReproductionRule(grid);
             grid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
             grid.Initialise();
@@ -140,7 +147,7 @@ namespace tests.GameOfLife
             grid.SwitchCellState(1,1);
             grid.SwitchCellState(1,2);
             // act
-            var result = rule.CheckRules(cellX,cellY);
+            var result = rule.Check(cellX,cellY);
             // assert
             Assert.Equal(expected, result);
         }

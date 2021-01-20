@@ -10,5 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.10" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.10" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Update="InputFiles/*.*"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+  </ItemGroup>
 </Project>

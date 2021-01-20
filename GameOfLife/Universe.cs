@@ -1,17 +1,49 @@
 using System;
+using System.Linq;
 
 namespace GameOfLife
 {
     public class Universe
     {
         public Cell[,] Grid { get; private set; } 
-        public Universe()
+        private IReader _fileInput;
+        public Universe(IReader fileInput)
         {
-            
+            _fileInput = fileInput;
         } 
+        private string[] ReceiveFileInput(string filePath)
+        {
+            return _fileInput.ReadFile(filePath);
+        }
+        public int[] GetGridDimensions(string[] setUp)
+        {
+            var fileInput = setUp[0].Split(" ");
+            var gridSetUp = new int[2];
+            int.TryParse(fileInput[0], out var gridLength);
+            int.TryParse(fileInput[1], out var gridWidth); 
+            gridSetUp = new int[] {gridLength, gridWidth};
+            return gridSetUp;
+        }
         public void SetUpGrid(int gridLength, int gridWidth)
         {
             Grid = (Cell[,])Array.CreateInstance(typeof(Cell), gridLength, gridWidth);
+        }
+        public void Populate(string[] setUp)
+        {
+            var gridSetUp = setUp.Skip(1).ToArray(); 
+            for (int row = 0; row < gridSetUp.Length; row++)
+            {
+                var gridCell = gridSetUp[row].Split(" ");// 
+                for (int col = 0; col < gridCell.Length; col++)
+                {
+                    Cell cell = new Cell();
+                    if (Enum.TryParse(typeof(State), gridCell[col], out var result))
+                    {
+                        cell.CellState = (State)result;
+                    }
+                    Grid[row, col] = cell;
+                }
+            }
         }
         public void Initialise()
         {
@@ -62,5 +94,6 @@ namespace GameOfLife
             cell.CellState = cell.CellState == State.Alive ? State.Dead : State.Alive;
             Grid[row, col] = cell;
         }
+        
     }
 }

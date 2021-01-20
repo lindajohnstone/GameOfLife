@@ -9,7 +9,7 @@ namespace GameOfLife
         {
             _grid = grid;
         } 
-        public bool CheckRules(int row, int col)
+        public bool Check(int row, int col)
         {
             var count = _grid.HowManyLiveNeighbours(row, col);
             var cell = _grid.Grid[row, col];

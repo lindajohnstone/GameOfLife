@@ -9,14 +9,17 @@ namespace GameOfLife
     {
         IOutput _output;
         IInput _input;
-        Universe _grid = new Universe();
+        Universe _grid;
         IRules[] _rules;
-        Universe _nextGrid = new Universe();
         GameController _game;
         private readonly ILogger<UniverseGenerator> _universeGeneratorLogger;
 
         public event GridPrintEventHandler PrintGrid;
-        public UniverseGenerator(IOutput output, Universe grid, IInput input, GameController game, ILogger<UniverseGenerator> universeGeneratorLogger)
+        public UniverseGenerator(IOutput output, 
+            Universe grid, 
+            IInput input, 
+            GameController game, 
+            ILogger<UniverseGenerator> universeGeneratorLogger)
         {
             _output = output;
             _grid = grid;
@@ -43,7 +46,8 @@ namespace GameOfLife
                 {
                     _output.Clear();
                     _output.WriteLine("Welcome to Game of Life");
-                    _output.WriteLine("Press 'Q' to stop");
+                    _output.WriteLine($"Press 'Q' to stop {System.Environment.NewLine}");
+                    
                     PrintGrid?.Invoke(this, new GridPrintEventArgs(_output, grid.Grid)); 
                     grid = _game.LoopThroughEachCell();
                     Thread.Sleep(400);

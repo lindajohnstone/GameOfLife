@@ -8,14 +8,16 @@ namespace GameOfLife
     {
         Universe _grid;
         IRules[] _rules;
-        IOutput _output;
         ILogger<GameController> _gameControllerLogger;
+        IReader _fileInput;
 
-        public GameController(Universe grid, IOutput output, ILogger<GameController> gameControllerLogger)
+        public GameController(Universe grid, 
+            ILogger<GameController> gameControllerLogger, 
+            IReader fileInput)
         {
             _grid = grid;
-            _output = output;
             _gameControllerLogger = gameControllerLogger;
+            _fileInput = fileInput;
             _rules = new IRules[] 
             {
                 new OvercrowdingRule(_grid),
@@ -27,14 +29,15 @@ namespace GameOfLife
         
         public void CheckRules(int row, int col)
         {
-            if (_rules.Any(_ => _.CheckRules(row, col))) _grid.SwitchCellState(row, col);
+            if (_rules.Any(_ => _.Check(row, col))) _grid.SwitchCellState(row, col);
         }
 
-        public Universe LoopThroughEachCell()
+        public Universe LoopThroughEachCell() // TODO: rename GetNextUniverse
         {
-            Universe nextGrid = new Universe();
+            Universe nextGrid = new Universe(_fileInput);
             nextGrid.SetUpGrid(Constants.GridLength, Constants.GridWidth);
-
+            if (_grid == null) _gameControllerLogger.LogInformation("_grid is null");
+            if (_grid.Grid == null) _gameControllerLogger.LogInformation("_grid.Grid is null"); 
             for (int row = 0; row <= _grid.Grid.GetUpperBound(0); row++)
             {
                 for (int col = 0; col <= _grid.Grid.GetUpperBound(1); col++)
