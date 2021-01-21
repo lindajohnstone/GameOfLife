@@ -5,7 +5,7 @@ namespace tests.GameOfLife
 {
     public class UniverseTests
     {
-        /* 
+        
         [Fact]
         public void Should_Test_SetUpGrid()
         {
@@ -19,7 +19,7 @@ namespace tests.GameOfLife
             grid.SetUpGrid(gridLength, gridWidth);
             // assert
             Assert.Equal(expected.Length, grid.Grid.Length);
-        } */
+        } 
         [Fact]
         public void Should_Test_SetUpGrid_Sets_Up_Universe_All_Live_Cells()
         {
